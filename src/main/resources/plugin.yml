@@ -1,0 +1,88 @@
+name: BungeeSuiteChat
+main : com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat
+version: 0.25
+description: Part of the BungeeSuite this plugin handles all player chat
+author: Bloodsplat
+website: http://www.spigotmc.org/resources/bungeesuite.9/
+prefix: BungeeSuite
+softdepend: [HeroChat, Heroes, TownyChat, Towny, Factions, BungeeSuiteTitles, PwnFilter, EssentialsChat]
+commands:
+    message:
+        description: Sends a private message to a player.
+        usage: Error type /msg (player) (message)
+        aliases: [tell,w,whisper,msg,m,t]
+    reply:
+        description: Replies to the last player who messaged you.
+        aliases: [r]
+    mute:
+        description: Mutes a specific player
+        usage: Error type /mute (player)
+    muteall:
+        description: Prevents all players from being able to send messages.
+    unmute:
+        description: Mutes a specific player
+        usage: Error type /unmute (player)
+    unmuteall:
+        description: Turns off the proxywide mute
+    local:
+        description: Toggles the players chat to a local area chat
+        aliases: [l,lc]
+        usage: Error you must also type a message
+    server:
+        description: Toggles the players chat to a server wide chat
+        aliases: [sc, s]
+        usage: Error you must also type a message
+    global:
+        description: Toggles the players chat to a proxy wide chat
+        aliases: [g]
+        usage: Error you must also type a message
+    toggle:
+        description: Toggles between available channels
+        usage: Error cannot toggle out of this channel
+        aliases: [togglechat, chatt, chattoggle]
+    nickname:
+        description: Toggles the players chat to a proxy wide chat
+        usage: Error type /nickname (nickname/*player) *(nickname)
+        aliases: [nick]
+    ignore:
+        description: Ignores specified player.
+        usage: Erorr type /ignore (player)
+        aliases: [ignoreplayer]
+    unignore:
+        decription: removes player from your ignore list
+        usage: Error type /unignore (player)
+        aliases: [unignoreplayer]
+    ignores:
+        description: lists all players you are ignoring
+        aliases: [listignores, ignoreslist]
+    chatspy:
+        description: Allows the player to see all messages
+        aliases: [cspy, chatview,socialspy]
+    cleanchat:
+        description: Removes any ugly formatting from chat
+        aliases: [cchat]
+    reloadchat:
+        description: Reloads all chat features
+        aliases: [chatreload]
+    whois:
+        description: displays all players with a nickname like the one specified.
+        usage: ERROR type /whois (player)
+        aliases: [who, identity]
+    factionchat:
+        description: toggles between the faction channels
+        aliases: [fc]
+    factionchatally:
+        description: toggles to ally chat within factions
+        aliases: [fca]
+    factionchatfaction:
+        description: toggles to faction only chat
+        aliases: [fcf]
+    factionchatpublic:
+        description: toggles back to normal chat
+        aliases: [fcp]
+    tempmute:
+        description: temporarily mutes a player
+        usage: ERROR type /tmute (player) (time in minutes)
+        aliases: [tmute]
+            
+        
