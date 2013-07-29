@@ -84,5 +84,8 @@ commands:
         description: temporarily mutes a player
         usage: ERROR type /tmute (player) (time in minutes)
         aliases: [tmute]
-            
+    admin:
+        description: toggles to the admin channel
+    afk:
+        description: tags a player as afk
         

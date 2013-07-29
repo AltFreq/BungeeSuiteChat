@@ -673,4 +673,27 @@ public class Utilities {
 				.runTaskAsynchronously(plugin);
 
 	}
+
+	public void adminChannel(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setPlayerAFK(String player) {
+		plugin.afkPlayers.add(Bukkit.getPlayer(player));
+	}
+
+	public void afkPlayer(Player sender) {
+		ByteArrayOutputStream b = new ByteArrayOutputStream();
+		DataOutputStream out = new DataOutputStream(b);
+		try {
+			out.writeUTF("AFKPlayer");
+			out.writeUTF(sender.getName());
+			out.writeBoolean(sender.hasPermission("bungeesuite.chat.afk.display"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		new PluginMessageTask(this.plugin, Bukkit.getOnlinePlayers()[0], b)
+				.runTaskAsynchronously(plugin);
+		
+	}
 }

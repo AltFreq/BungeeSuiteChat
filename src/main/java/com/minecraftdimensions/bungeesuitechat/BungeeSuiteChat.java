@@ -89,6 +89,8 @@ public class BungeeSuiteChat extends JavaPlugin {
 	public String serverName;
 
 	HashMap<String,String> suffixes = new HashMap<String,String>();
+	
+	ArrayList<Player> afkPlayers = new ArrayList<Player>();
 
 	
 	@Override
@@ -170,6 +172,8 @@ public class BungeeSuiteChat extends JavaPlugin {
 	private void registerListeners() {
 		getServer().getPluginManager().registerEvents(
 				new ChatListener(this), this);
+		getServer().getPluginManager().registerEvents(
+				new AFKListener(this), this);
 	}
 
 	private boolean setupVault()

@@ -26,7 +26,7 @@ public class AdminCommand implements CommandExecutor {
 			plugin.utils.getMessage(sender.getName(), "NO_PERMISSION");
 			return true;
 		}
-		plugin.utils.chatSpy(sender.getName());
+		plugin.utils.adminChannel(sender.getName());
 		return true;
 	}
 

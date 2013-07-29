@@ -39,8 +39,8 @@ public class ChatListener implements PluginMessageListener, Listener {
 	BungeeSuiteChat plugin;
 	String test;
 
-	public ChatListener(BungeeSuiteChat bungeeSuiteTeleports) {
-		plugin = bungeeSuiteTeleports;
+	public ChatListener(BungeeSuiteChat bungeeSuiteChat) {
+		plugin = bungeeSuiteChat;
 	}
 
 	@EventHandler
@@ -496,6 +496,10 @@ public class ChatListener implements PluginMessageListener, Listener {
 				e.printStackTrace();
 			}
 			plugin.utils.removeIgnorePlayer(player, pl);
+			return;
+		}
+		if (channel.equalsIgnoreCase("SetPlayerAFK")) {
+			plugin.utils.setPlayerAFK(player);
 			return;
 		}
 	}

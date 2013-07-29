@@ -3,6 +3,7 @@ package com.minecraftdimensions.bungeesuitechat.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
 import com.minecraftdimensions.bungeesuitechat.CommandUtil;
@@ -12,7 +13,7 @@ public class AfkCommand implements CommandExecutor {
 	BungeeSuiteChat plugin;
 
 	private static final String[] PERMISSION_NODES = {
-			"bungeesuite.chat.admin", "bungeesuite.chat.*",
+			"bungeesuite.chat.afk", "bungeesuite.chat.user",  "bungeesuite.chat.*",
 			"bungeesuite.admin", "bungeesuite.*" };
 
 	public AfkCommand(BungeeSuiteChat bungeeSuiteChat) {
@@ -26,7 +27,7 @@ public class AfkCommand implements CommandExecutor {
 			plugin.utils.getMessage(sender.getName(), "NO_PERMISSION");
 			return true;
 		}
-		plugin.utils.chatSpy(sender.getName());
+		plugin.utils.afkPlayer((Player)sender);
 		return true;
 	}
 
