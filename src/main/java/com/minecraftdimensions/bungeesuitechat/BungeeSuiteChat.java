@@ -90,7 +90,7 @@ public class BungeeSuiteChat extends JavaPlugin {
 
 	HashMap<String,String> suffixes = new HashMap<String,String>();
 	
-	ArrayList<Player> afkPlayers = new ArrayList<Player>();
+	public ArrayList<Player> afkPlayers = new ArrayList<Player>();
 
 	
 	@Override

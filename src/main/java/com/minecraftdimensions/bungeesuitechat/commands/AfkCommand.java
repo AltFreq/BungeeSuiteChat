@@ -27,6 +27,9 @@ public class AfkCommand implements CommandExecutor {
 			plugin.utils.getMessage(sender.getName(), "NO_PERMISSION");
 			return true;
 		}
+		if(plugin.afkPlayers.contains(sender.getName())){
+			return true;
+		}
 		plugin.utils.afkPlayer((Player)sender);
 		return true;
 	}
