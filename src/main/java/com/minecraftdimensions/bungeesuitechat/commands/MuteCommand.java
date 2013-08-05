@@ -3,31 +3,16 @@ package com.minecraftdimensions.bungeesuitechat.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
-import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
-import com.minecraftdimensions.bungeesuitechat.CommandUtil;
+import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
 
 
 public class MuteCommand implements CommandExecutor {
 
-	BungeeSuiteChat plugin;
-	
-	private static final String[] PERMISSION_NODES = { "bungeesuite.chat.mute", "bungeesuite.chat.*",
-		"bungeesuite.mod", "bungeesuite.admin", "bungeesuite.*" };
-
-	public MuteCommand(BungeeSuiteChat bungeeSuiteTeleports){
-		plugin = bungeeSuiteTeleports;
-	}
-
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
-		if (!CommandUtil.hasPermission(sender, PERMISSION_NODES)) {
-			plugin.utils.getMessage(sender.getName(), "NO_PERMISSION");
-			return true;
-		}
 		if(args.length>0){
-			plugin.utils.mutePlayer(sender.getName(),args[0]);
+			PlayerManager.mutePlayer(sender,args[0],true);
 			return true;
 		}
 		return false;

@@ -1,35 +1,28 @@
-package com.minecraftdimensions.bungeesuitechat;
+package com.minecraftdimensions.bungeesuitechat.listeners;
 
-import org.bukkit.entity.Player;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
+import com.minecraftdimensions.bungeesuitechat.objects.BSPlayer;
 
 public class AFKListener implements Listener {
 
-	BungeeSuiteChat plugin;
-	String test;
-
-	public AFKListener(BungeeSuiteChat bungeeSuiteChat) {
-		plugin = bungeeSuiteChat;
-	}
-
 	@EventHandler
 	public void playerCommand(PlayerCommandPreprocessEvent e) {
-		Player p =e.getPlayer();
-		if(plugin.afkPlayers.contains(p)){
-			plugin.afkPlayers.remove(p);
-			plugin.utils.afkPlayer(p);
+		BSPlayer p =PlayerManager.getPlayer(e.getPlayer());
+		if(p.isAFK()){
+			PlayerManager.setPlayerAFK(e.getPlayer());
 		}
 	}
 	
 	@EventHandler
 	public void playerChat(AsyncPlayerChatEvent e) {
-		Player p =e.getPlayer();
-		if(plugin.afkPlayers.contains(p)){
-			plugin.afkPlayers.remove(p);
-			plugin.utils.afkPlayer(p);
+		BSPlayer p =PlayerManager.getPlayer(e.getPlayer());
+		if(p.isAFK()){
+			PlayerManager.setPlayerAFK(e.getPlayer());
 		}
 	}
 	//leaving out due to inefficiency

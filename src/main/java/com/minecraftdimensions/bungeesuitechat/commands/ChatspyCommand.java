@@ -3,30 +3,14 @@ package com.minecraftdimensions.bungeesuitechat.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
-import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
-import com.minecraftdimensions.bungeesuitechat.CommandUtil;
+import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
 
 public class ChatspyCommand implements CommandExecutor {
-
-	BungeeSuiteChat plugin;
-
-	private static final String[] PERMISSION_NODES = {
-			"bungeesuite.chat.chatspy", "bungeesuite.chat.*",
-			"bungeesuite.admin", "bungeesuite.*" };
-
-	public ChatspyCommand(BungeeSuiteChat bungeeSuiteChat) {
-		plugin = bungeeSuiteChat;
-	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
-		if (!CommandUtil.hasPermission(sender, PERMISSION_NODES)) {
-			plugin.utils.getMessage(sender.getName(), "NO_PERMISSION");
-			return true;
-		}
-		plugin.utils.chatSpy(sender.getName());
+		PlayerManager.setChatSpyPlayer(sender.getName());
 		return true;
 	}
 

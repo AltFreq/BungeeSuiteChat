@@ -48,6 +48,14 @@ commands:
         description: Ignores specified player.
         usage: Erorr type /ignore (player)
         aliases: [ignoreplayer]
+    me:
+        description: Ignores specified player.
+        usage: Erorr type /ignore (player)
+        aliases: [ignoreplayer]
+    nicknameoff:
+        description: Ignores specified player.
+        usage: Erorr type /ignore (player)
+        aliases: [ignoreplayer]
     unignore:
         decription: removes player from your ignore list
         usage: Error type /unignore (player)

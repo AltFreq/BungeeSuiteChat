@@ -1,24 +1,30 @@
 package com.minecraftdimensions.bungeesuitechat.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
 
+public class MeCommand implements CommandExecutor {
 
-public class TempMuteCommand implements CommandExecutor {
-	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
-		if(args.length>1){
-			int time;
-			try{
-			time = Integer.parseInt(args[1]);
-			}catch(Exception e){
-				return false;
+		if(PlayerManager.getPlayer(sender).isMuted()){
+			return true;
+		}
+		if(args.length>0){
+			String message =ChatColor.GRAY+" * ";
+			for(String arg: args){
+				message+= arg+" ";
 			}
-			PlayerManager.tempMutePlayer(sender.getName(),args[0],time);
+			Player p =(Player) sender;
+			for(Player pl:p.getWorld().getPlayers()){
+				pl.sendMessage(message);
+			}
 			return true;
 		}
 		return false;
