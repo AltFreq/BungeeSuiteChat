@@ -79,15 +79,11 @@ public class MessageListener implements PluginMessageListener {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println(prefix);
-			System.out.println(suffix);
 			for(int i=0;i<prefix.length;i+=2){
 				PrefixSuffixManager.prefixes.put(prefix[i], prefix[i+1]);
-				System.out.println(prefix[i]+" , "+ prefix[i+1]);
 			}
 			for(int i=0;i<suffix.length;i+=2){
 				PrefixSuffixManager.suffixes.put(suffix[i], suffix[i+1]);
-				System.out.println(suffix[i]+" , "+ suffix[i+1]);
 			}
 		}
 		if(channel.equals("SendPlayersIgnores")){

@@ -30,7 +30,6 @@ public class BSPlayer {
 	}
 	
 	public BSPlayer(String serialised){
-		System.out.println(serialised);
 		String data[] =serialised.split("~");
 		playername = data[0];
 		channel = data[1];

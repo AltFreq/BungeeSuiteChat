@@ -23,7 +23,6 @@ public class Channel {
 		owner = data[2];
 		muted = Boolean.parseBoolean(data[3]);
 		isDefault = Boolean.parseBoolean(data[4]);
-		System.out.println("Loaded channel "+ name);
 	}
 	
 	

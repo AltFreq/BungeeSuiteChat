@@ -34,7 +34,6 @@ public class ChannelManager {
 			removeChannel(c.getName());
 		}
 		channels.add(c);
-		System.out.println(c.isDefault);
 	}
 	
 	private static void removeChannel(String name) {
