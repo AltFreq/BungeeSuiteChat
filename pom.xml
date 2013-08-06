@@ -8,9 +8,13 @@
 
 	<repositories>
 		<repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public</url>
-        </repository>
+			<id>bukkit-repo</id>
+			<url>http://repo.bukkit.org/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>vault-repo</id>
+			<url>http://ci.herocraftonline.com/plugin/repository/everything</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -36,7 +40,7 @@
 			<artifactId>MCore-Bloodsplat</artifactId>
 			<version>2.01</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/MCore.jar</systemPath>
+			<systemPath>${project.basedir}/lib/mcore.jar</systemPath>
 		</dependency>
 	</dependencies>
 	<build>
@@ -71,6 +75,6 @@
 		</plugins>
 	</build>
 	<name>BungeeSuiteChat</name>
-	<url>http://www.spigotmc.org/resources/bungeesuite.9/</url>
+	<url>http://minecraftdimensions.com</url>
 	<groupId>com.minecraftdimensions</groupId>
 </project>
