@@ -71,6 +71,6 @@
 		</plugins>
 	</build>
 	<name>BungeeSuiteChat</name>
-	<url>http://minecraftdimensions.com</url>
+	<url>http://www.spigotmc.org/resources/bungeesuite.9/</url>
 	<groupId>com.minecraftdimensions</groupId>
 </project>
