@@ -17,7 +17,7 @@ public class MeCommand implements CommandExecutor {
 			return true;
 		}
 		if(args.length>0){
-			String message =ChatColor.GRAY+" * ";
+			String message =ChatColor.GRAY+" *"+sender.getName()+" ";
 			for(String arg: args){
 				message+= arg+" ";
 			}

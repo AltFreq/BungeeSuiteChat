@@ -1,15 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.mcdimensions.bungeesuitechat</groupId>
 	<artifactId>BungeeSuiteChat</artifactId>
-	<version>0.25-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	<name>BungeeSuiteChat</name>
+	<version>0.5</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<build.number>0.77</build.number>
 	</properties>
 
 	<repositories>
@@ -17,10 +11,6 @@
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
-		<repository>
-			<id>vault-repo</id>
-			<url>http://ci.herocraftonline.com/plugin/repository/everything</url>
-		</repository>
 	</repositories>
 
 	<dependencies>
@@ -34,9 +24,34 @@
 			<artifactId>Vault</artifactId>
 			<version>1.2.26-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.minecraftDimensions</groupId>
+			<artifactId>Factions-Bloodsplat</artifactId>
+			<version>2.01</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/factions.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.minecraftDimensions</groupId>
+			<artifactId>MCore-Bloodsplat</artifactId>
+			<version>2.01</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/MCore.jar</systemPath>
+		</dependency>
 	</dependencies>
 	<build>
-	<finalName>BungeeSuiteChat</finalName>
+		<finalName>BungeeSuiteChat</finalName>
+		<defaultGoal>clean install</defaultGoal>
+		<resources>
+			<resource>
+				<targetPath>.</targetPath>
+				<filtering>true</filtering>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>*.yml</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -45,10 +60,17 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+					<compilerArguments>
+						<O>-Xlint:all</O>
+						<O>-Xlint:-path</O>
+					</compilerArguments>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	<name>BungeeSuiteChat</name>
+	<url>http://minecraftdimensions.com</url>
+	<groupId>com.minecraftdimensions</groupId>
 </project>

@@ -32,7 +32,6 @@ import com.minecraftdimensions.bungeesuitechat.commands.channel.ToggleCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.factions.FactionChatAllyCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.factions.FactionChatCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.factions.FactionChatFactionCommand;
-import com.minecraftdimensions.bungeesuitechat.commands.factions.FactionChatPublicCommand;
 import com.minecraftdimensions.bungeesuitechat.listeners.AFKListener;
 import com.minecraftdimensions.bungeesuitechat.listeners.ChatListener;
 import com.minecraftdimensions.bungeesuitechat.listeners.LoginListener;
@@ -91,7 +90,6 @@ public class BungeeSuiteChat extends JavaPlugin {
 			getCommand("factionchat").setExecutor(new FactionChatCommand());
 			getCommand("factionchatally").setExecutor(new FactionChatAllyCommand());
 			getCommand("factionchatfaction").setExecutor(new FactionChatFactionCommand());
-			getCommand("factionchatpublic").setExecutor(new FactionChatPublicCommand());
 			}
 		}
 	}

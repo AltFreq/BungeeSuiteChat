@@ -20,6 +20,14 @@ public class LoginListener implements Listener {
 	public void setFormatChat(final PlayerLoginEvent e) {
 		if(e.getPlayer().hasPermission("bungeesuite.*")){
 			PermissionsManager.addAllPermissions(e.getPlayer());
+		}else if(e.getPlayer().hasPermission("bungeesuite.admin")){
+			PermissionsManager.addAdminPermissions(e.getPlayer());
+		}else if(e.getPlayer().hasPermission("bungeesuite.mod")){
+			PermissionsManager.addModPermissions(e.getPlayer());
+		}else if(e.getPlayer().hasPermission("bungeesuite.vip")){
+			PermissionsManager.addVIPPermissions(e.getPlayer());
+		}else if(e.getPlayer().hasPermission("bungeesuite.user")){
+			PermissionsManager.addUserPermissions(e.getPlayer());
 		}
 		if(!ChannelManager.recievedChannels){
 			if(!ChannelManager.checkDefaultChannels()){

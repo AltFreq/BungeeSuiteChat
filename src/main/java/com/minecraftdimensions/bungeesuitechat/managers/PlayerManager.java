@@ -62,8 +62,8 @@ public class PlayerManager {
 			out.writeUTF("AFKPlayer");
 			out.writeUTF(p.getName());
 			out.writeBoolean(p.isAFK());
-			out.writeBoolean(sender.hasPermission("bungeesuite.chat.afk.global"));
-			out.writeBoolean(sender.hasPermission("bungeesuite.chat.afk.display"));
+			out.writeBoolean(sender.hasPermission("bungeesuite.chat.command.afk.global"));
+			out.writeBoolean(sender.hasPermission("bungeesuite.chat.command.afk.display"));
 		} catch (IOException s) {
 			s.printStackTrace();
 		}

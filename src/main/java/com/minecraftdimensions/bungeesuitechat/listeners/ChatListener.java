@@ -10,6 +10,7 @@ import com.minecraftdimensions.bungeesuitechat.Utilities;
 import com.minecraftdimensions.bungeesuitechat.managers.ChannelManager;
 import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
 import com.minecraftdimensions.bungeesuitechat.objects.BSPlayer;
+import com.minecraftdimensions.bungeesuitechat.objects.ServerData;
 
 public class ChatListener implements Listener {
 
@@ -39,6 +40,14 @@ public class ChatListener implements Listener {
 		}else if(ChannelManager.isAdmin(p.getChannel())){
 			e.getRecipients().clear();
 			e.getRecipients().addAll(ChannelManager.getAdminPlayers());
+		}else if(ServerData.usingFactions() && ChannelManager.isFactionChannel(p.getChannel())){
+			if(ChannelManager.isFaction(p.getChannel())){
+				e.getRecipients().clear();
+				e.getRecipients().addAll(ChannelManager.getFactionPlayers(e.getPlayer()));
+			}else if(ChannelManager.isFactionAlly(p.getChannel())){
+				e.getRecipients().clear();
+				e.getRecipients().addAll(ChannelManager.getFactionAllyPlayers(e.getPlayer()));
+			}
 		}
 	}
 	

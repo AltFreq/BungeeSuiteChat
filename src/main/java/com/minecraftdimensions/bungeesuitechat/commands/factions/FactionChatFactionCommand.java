@@ -28,8 +28,6 @@ public class FactionChatFactionCommand implements CommandExecutor {
 			p.setChannel(channel);
 		}else{
 			ChannelManager.toggleToPlayersFactionChannel(sender, "Faction");
-			//if channel already = Faction change back to next
-			//getservers default channel ChatConfig default / forced channel
 		}
 		return true;
 	}

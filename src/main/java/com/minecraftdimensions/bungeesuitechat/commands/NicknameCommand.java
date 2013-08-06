@@ -15,7 +15,7 @@ public class NicknameCommand implements CommandExecutor {
 			return true;
 		}
 		if (args.length == 2) {
-			if (!sender.hasPermission("bungeesuite.chat.nickname.other")) {
+			if (!sender.hasPermission("bungeesuite.chat.command.nickname.other")) {
 				sender.sendMessage(command.getPermissionMessage());
 				return true;
 			}else{

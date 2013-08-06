@@ -6,11 +6,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.massivecraft.factions.Rel;
+import com.massivecraft.factions.entity.Faction;
+import com.massivecraft.factions.entity.FactionColls;
+import com.massivecraft.factions.entity.UPlayer;
 import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
 import com.minecraftdimensions.bungeesuitechat.objects.BSPlayer;
 import com.minecraftdimensions.bungeesuitechat.objects.Channel;
@@ -114,6 +121,15 @@ public class ChannelManager {
 	public static boolean isAdmin(Channel channel) {
 		return channel.getName().equals("Admin");
 	}
+	public static boolean isFactionChannel(Channel channel) {
+		return channel.getName().equals("Faction")|| channel.getName().equals("FactionAlly");
+	}
+	public static boolean isFaction(Channel channel) {
+		return channel.getName().equals("Faction");
+	}
+	public static boolean isFactionAlly(Channel channel) {
+		return channel.getName().equals("FactionAlly");
+	}
 
 	public static Collection<Player> getNonLocal(Player player) {
 		Collection<Player> nonLocals = new ArrayList<Player>();
@@ -145,6 +161,40 @@ public class ChannelManager {
 			}
 		}
 		return globalPlayers;
+	}
+	
+	public static Collection<Player> getFactionPlayers(Player p) {
+		Collection<Player> factionPlayers = new ArrayList<Player>();
+		UPlayer uplayer = UPlayer.get(p);
+		for(Player ps: uplayer.getFaction().getOnlinePlayers()){
+			if(ps.hasPermission("bungeesuite.chat.channel.faction")){
+				factionPlayers.add(p);
+			}
+		}
+		return factionPlayers;
+	}
+	
+	public static Collection<Player> getFactionAllyPlayers(Player p) {
+		Collection<Player> factionPlayers = new ArrayList<Player>();
+		UPlayer uplayer = UPlayer.get(p);
+		Map<Rel, List<String>> rels = uplayer.getFaction()
+				.getFactionNamesPerRelation(uplayer.getFaction());
+			for(Player ps: uplayer.getFaction().getOnlinePlayers()){
+				if(ps.hasPermission("bungeesuite.chat.channel.factionally")){
+					factionPlayers.add(ps);
+				}
+			}
+		for (String data : rels.get(Rel.ALLY)) {
+			Faction f = FactionColls.get()
+					.getForUniverse(uplayer.getFaction().getUniverse())
+					.getByName(ChatColor.stripColor(data));
+			for(Player ps: f.getOnlinePlayers()){
+				if(ps.hasPermission("bungeesuite.chat.channel.factionally")){
+					factionPlayers.add(ps);
+				}
+			}
+		}
+		return factionPlayers;
 	}
 	
 	public static Collection<BSPlayer> getBSGlobalPlayers() {
@@ -311,5 +361,24 @@ public class ChannelManager {
 		}
 		
 	}
+
+	public static void toggleToPlayersFactionChannel(CommandSender sender,
+			String channel) {
+		ByteArrayOutputStream b = new ByteArrayOutputStream();
+		DataOutputStream out = new DataOutputStream(b);
+		UPlayer uplayer = UPlayer.get(sender);
+		try {
+			out.writeUTF("ToggleToPlayersFactionChannel");
+			out.writeUTF(sender.getName());
+			out.writeUTF(channel);
+			out.writeBoolean(!uplayer.getFaction().isDefault());
+		} catch (IOException s) {
+			s.printStackTrace();
+		}
+		new PluginMessageTask(b).runTaskAsynchronously(BungeeSuiteChat.instance);
+		
+	}
+
+
 	
 }
