@@ -25,6 +25,13 @@ commands:
         permission: bungeesuite.chat.command.chatspy
         permission-message: §cYou do not have permission for this command
         usage: /<command>
+    channelinfo:
+        description: Gets the information for the channel
+        aliases: [channel,c,cinfo]
+        permission: bungeesuite.chat.command.channelinfo
+        permission-message: §cYou do not have permission for this command
+        usage: /<command> - gets current channels information
+               /<command> (channel) - gets the channels information
     global:
         description: Send messages/toggle to the global channel
         aliases: [g,globalchat,globalchannel,gchannel]
@@ -117,7 +124,7 @@ commands:
         usage: /<command> (player) (time in minutes)
     toggle:
         description: Toggles through your available channels
-        aliases: [c,channel,tc,togglechannel,channeltoggle, ct]
+        aliases: [tc,togglechannel,channeltoggle, ct]
         permission: bungeesuite.chat.command.toggle
         permission-message: §cYou do not have permission for this command
         usage: /<command>
@@ -173,6 +180,7 @@ permissions:
             bungeesuite.chat.channel.faction: true
             bungeesuite.chat.channel.factionally: true
             bungeesuite.chat.command.afk: true
+            bungeesuite.chat.command.channelinfo: true
             bungeesuite.chat.command.ignore: true
             bungeesuite.chat.command.ignores: true
             bungeesuite.chat.command.mesage: true

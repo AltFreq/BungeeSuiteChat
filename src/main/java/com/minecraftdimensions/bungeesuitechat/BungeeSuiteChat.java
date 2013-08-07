@@ -98,6 +98,7 @@ public class BungeeSuiteChat extends JavaPlugin {
 		getCommand("admin").setExecutor(new AdminCommand());
 		getCommand("afk").setExecutor(new AfkCommand());
 		getCommand("chatspy").setExecutor(new ChatspyCommand());
+		getCommand("channelinfo").setExecutor(new ChannelInfoCommand(this));
 		getCommand("global").setExecutor(new GlobalCommand());
 		getCommand("ignore").setExecutor(new IgnoreCommand());
 		getCommand("ignores").setExecutor(new IgnoresCommand());
@@ -116,16 +117,15 @@ public class BungeeSuiteChat extends JavaPlugin {
 		getCommand("unignore").setExecutor(new UnignoreCommand());
 		getCommand("unmute").setExecutor(new UnMuteCommand());
 		getCommand("unmuteall").setExecutor(new UnMuteAllCommand());
+		
 //		getCommand("createchannel").setExecutor(new WhoisCommand(this));
 //		getCommand("deletechannel").setExecutor(new WhoisCommand(this));
 //		getCommand("leavechannel").setExecutor(new WhoisCommand(this));
 //		getCommand("joinchannel").setExecutor(new WhoisCommand(this));
 //		getCommand("kickchannel").setExecutor(new WhoisCommand(this));
 //		getCommand("formatchannel").setExecutor(new WhoisCommand(this));
-//		getCommand("promotechannel").setExecutor(new WhoisCommand(this));
-//		getCommand("demotechannel").setExecutor(new WhoisCommand(this));
-//		getCommand("infochannel").setExecutor(new WhoisCommand(this));
-//		getCommand("ownerchannel").setExecutor(new WhoisCommand(this));
+//		getCommand("channelinfo").setExecutor(new WhoisCommand(this));
+//		getCommand("setchannelowner").setExecutor(new WhoisCommand(this));
 		
 	}
 

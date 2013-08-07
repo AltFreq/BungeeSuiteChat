@@ -378,6 +378,21 @@ public class ChannelManager {
 		
 	}
 
+	public static void getChannelInfo(CommandSender sender, String channel) {
+		ByteArrayOutputStream b = new ByteArrayOutputStream();
+		DataOutputStream out = new DataOutputStream(b);
+		UPlayer uplayer = UPlayer.get(sender);
+		try {
+			out.writeUTF("GetChannelInfo");
+			out.writeUTF(sender.getName());
+			out.writeUTF(channel);
+			out.writeBoolean(!uplayer.getFaction().isDefault());
+		} catch (IOException s) {
+			s.printStackTrace();
+		}
+		new PluginMessageTask(b).runTaskAsynchronously(BungeeSuiteChat.instance);		
+	}
+
 
 	
 }
