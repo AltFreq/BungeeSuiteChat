@@ -385,6 +385,7 @@ public class ChannelManager {
 			out.writeUTF("GetChannelInfo");
 			out.writeUTF(sender.getName());
 			out.writeUTF(channel);
+			out.writeBoolean(sender.hasPermission("bungeesuite.chat.command.channelinfo.format"));
 		} catch (IOException s) {
 			s.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-package com.minecraftdimensions.bungeesuitechat;
+package com.minecraftdimensions.bungeesuitechat.commands.channel;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

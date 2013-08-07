@@ -165,6 +165,7 @@ permissions:
             bungeesuite.chat.command.reload: true
             bungeesuite.chat.command.nickname.other: true
             bungeesuite.chat.vip: true
+            bungeesuite.chat.command.channelinfo.format: true
     bungeesuite.chat.mod:
         description: Gives access to all BungeeSuiteChat mod commands
         children:
