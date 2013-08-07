@@ -124,7 +124,6 @@ public class BungeeSuiteChat extends JavaPlugin {
 //		getCommand("joinchannel").setExecutor(new WhoisCommand(this));
 //		getCommand("kickchannel").setExecutor(new WhoisCommand(this));
 //		getCommand("formatchannel").setExecutor(new WhoisCommand(this));
-//		getCommand("channelinfo").setExecutor(new WhoisCommand(this));
 //		getCommand("setchannelowner").setExecutor(new WhoisCommand(this));
 		
 	}
