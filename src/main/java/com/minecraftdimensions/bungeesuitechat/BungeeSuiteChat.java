@@ -98,7 +98,7 @@ public class BungeeSuiteChat extends JavaPlugin {
 		getCommand("admin").setExecutor(new AdminCommand());
 		getCommand("afk").setExecutor(new AfkCommand());
 		getCommand("chatspy").setExecutor(new ChatspyCommand());
-		getCommand("channelinfo").setExecutor(new ChannelInfoCommand(this));
+		getCommand("channelinfo").setExecutor(new ChannelInfoCommand());
 		getCommand("global").setExecutor(new GlobalCommand());
 		getCommand("ignore").setExecutor(new IgnoreCommand());
 		getCommand("ignores").setExecutor(new IgnoresCommand());
