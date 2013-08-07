@@ -6,12 +6,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 
 import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
 import com.minecraftdimensions.bungeesuitechat.managers.ChannelManager;
 import com.minecraftdimensions.bungeesuitechat.managers.PermissionsManager;
 import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
+import com.minecraftdimensions.bungeesuitechat.objects.ServerData;
 
 
 public class LoginListener implements Listener {
@@ -44,6 +46,13 @@ public class LoginListener implements Listener {
 			}
 			
 		}, 10L);
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void playerJoin(PlayerJoinEvent e) {
+		if(ServerData.getConnectionMessage()){
+			e.setJoinMessage(null);
+		}
 	}
 
 	
