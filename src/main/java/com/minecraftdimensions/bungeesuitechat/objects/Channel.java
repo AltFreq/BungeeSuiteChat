@@ -7,13 +7,15 @@ public class Channel {
 	private String owner;
 	private boolean muted;
 	public boolean isDefault;
+	public boolean open;
 	
-	public Channel(String name, String format, String owner, boolean muted, boolean isDefault){
+	public Channel(String name, String format, String owner, boolean muted, boolean isDefault, boolean open){
 		this.name = name;
 		this.format = format;
 		this.owner = owner;
 		this.muted = muted;
 		this.isDefault = isDefault;
+		this.open=open;
 	}
 	
 	public Channel(String serialised){
@@ -23,6 +25,7 @@ public class Channel {
 		owner = data[2];
 		muted = Boolean.parseBoolean(data[3]);
 		isDefault = Boolean.parseBoolean(data[4]);
+		open = Boolean.parseBoolean(data[5]);
 	}
 	
 	
@@ -57,7 +60,7 @@ public class Channel {
 		return isDefault;
 	}
 	public String serialise(){
-		return name+"~"+format+"~"+owner+"~"+muted+"~"+isDefault;
+		return name+"~"+format+"~"+owner+"~"+muted+"~"+isDefault+"~"+open;
 	}
 
 }
