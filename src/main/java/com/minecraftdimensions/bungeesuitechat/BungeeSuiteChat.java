@@ -25,6 +25,8 @@ import com.minecraftdimensions.bungeesuitechat.commands.UnMuteAllCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.UnMuteCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.UnignoreCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.channel.AdminCommand;
+import com.minecraftdimensions.bungeesuitechat.commands.channel.ChannelInfoCommand;
+import com.minecraftdimensions.bungeesuitechat.commands.channel.FormatChannelCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.channel.GlobalCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.channel.LocalCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.channel.ServerCommand;
@@ -99,6 +101,7 @@ public class BungeeSuiteChat extends JavaPlugin {
 		getCommand("afk").setExecutor(new AfkCommand());
 		getCommand("chatspy").setExecutor(new ChatspyCommand());
 		getCommand("channelinfo").setExecutor(new ChannelInfoCommand());
+		getCommand("formatchannel").setExecutor(new FormatChannelCommand());
 		getCommand("global").setExecutor(new GlobalCommand());
 		getCommand("ignore").setExecutor(new IgnoreCommand());
 		getCommand("ignores").setExecutor(new IgnoresCommand());
@@ -118,12 +121,12 @@ public class BungeeSuiteChat extends JavaPlugin {
 		getCommand("unmute").setExecutor(new UnMuteCommand());
 		getCommand("unmuteall").setExecutor(new UnMuteAllCommand());
 		
+	//TODO
 //		getCommand("createchannel").setExecutor(new WhoisCommand(this));
 //		getCommand("deletechannel").setExecutor(new WhoisCommand(this));
 //		getCommand("leavechannel").setExecutor(new WhoisCommand(this));
 //		getCommand("joinchannel").setExecutor(new WhoisCommand(this));
 //		getCommand("kickchannel").setExecutor(new WhoisCommand(this));
-//		getCommand("formatchannel").setExecutor(new WhoisCommand(this));
 //		getCommand("setchannelowner").setExecutor(new WhoisCommand(this));
 		
 	}

@@ -1,6 +1,6 @@
 name: Chat
 main : com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat
-version: 0.50
+version: 0.51
 description: Part of the BungeeSuite this plugin handles all player chat
 author: Bloodsplat
 website: http://www.spigotmc.org/resources/bungeesuite.9/
@@ -30,8 +30,15 @@ commands:
         aliases: [channel,c,cinfo]
         permission: bungeesuite.chat.command.channelinfo
         permission-message: §cYou do not have permission for this command
-        usage: /<command> - gets current channels information
-               /<command> (channel) - gets the channels information
+        usage: |
+            /<command> - gets current channels information
+            /<command> (channel) - gets the channels information
+    formatchannel:
+        description: Changes the format of the channel
+        aliases: [formatc,cformat,cf]
+        permission: bungeesuite.chat.command.format
+        permission-message: §cYou do not have permission for this command
+        usage: /<command> (format)- changes the current channels format
     global:
         description: Send messages/toggle to the global channel
         aliases: [g,globalchat,globalchannel,gchannel]

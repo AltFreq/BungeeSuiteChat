@@ -392,6 +392,21 @@ public class ChannelManager {
 		new PluginMessageTask(b).runTaskAsynchronously(BungeeSuiteChat.instance);		
 	}
 
+	public static void setChannelFormat(CommandSender sender, String channel) {
+		ByteArrayOutputStream b = new ByteArrayOutputStream();
+		DataOutputStream out = new DataOutputStream(b);
+		try {
+			out.writeUTF("SetChannelFormat");
+			out.writeUTF(sender.getName());
+			out.writeUTF(channel);
+			out.writeBoolean(sender.hasPermission("bungeesuite.chat.command.setformat.bypass"));
+		} catch (IOException s) {
+			s.printStackTrace();
+		}
+		new PluginMessageTask(b).runTaskAsynchronously(BungeeSuiteChat.instance);		
+		
+	}
+
 
 	
 }
