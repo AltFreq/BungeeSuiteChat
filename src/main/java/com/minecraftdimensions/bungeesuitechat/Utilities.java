@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
@@ -85,10 +84,6 @@ public class Utilities {
 		return message;
 	}
 
-	public static void getDefaultMessage(CommandSender sender, String string) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 	
