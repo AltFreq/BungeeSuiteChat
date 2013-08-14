@@ -20,13 +20,11 @@ public class Channel {
 	
 	public Channel(String serialised){
 		String data[] = serialised.split("~");
-		System.out.println(serialised);
 		name = data[0];
 		format = data[1];
 		owner = data[2];
 		muted = Boolean.parseBoolean(data[3]);
 		isDefault = Boolean.parseBoolean(data[4]);
-		System.out.print(isDefault);
 		open = Boolean.parseBoolean(data[5]);
 	}
 	
