@@ -21,6 +21,10 @@ public class AFKListener implements Listener {
 	@EventHandler
 	public void playerChat(AsyncPlayerChatEvent e) {
 		BSPlayer p =PlayerManager.getPlayer(e.getPlayer());
+		if(p==null){
+			e.setCancelled(true);
+			return;
+		}
 		if(p.isAFK()){
 			PlayerManager.setPlayerAFK(e.getPlayer());
 		}

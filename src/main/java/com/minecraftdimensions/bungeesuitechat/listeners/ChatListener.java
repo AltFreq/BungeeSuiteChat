@@ -1,5 +1,6 @@
 package com.minecraftdimensions.bungeesuitechat.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,6 +21,11 @@ public class ChatListener implements Listener {
 			return;
 		}
 		BSPlayer p = PlayerManager.getPlayer(e.getPlayer());
+		if(p==null){
+			Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED+"Player did not connect properly through BungeeCord, Chat canceled!");
+			e.setCancelled(true);
+			return;
+		}
 		if(!ChannelManager.playerHasPermissionToTalk(p)){
 			e.setCancelled(true);
 			e.getPlayer().sendMessage(ChatColor.RED+"You do not have permission to talk in this channel");
@@ -63,6 +69,10 @@ public class ChatListener implements Listener {
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void setLogChat(AsyncPlayerChatEvent e) {
 		BSPlayer p=PlayerManager.getPlayer(e.getPlayer());
+		if(p==null){
+			e.setCancelled(true);
+			return;
+		}
 		if(ChannelManager.isGlobal(p.getChannel())){
 			ChannelManager.sendGlobalChat(e.getPlayer().getName(),String.format(e.getFormat(), p.getDisplayingName(), e.getMessage()));
 		}else if(ChannelManager.isAdmin(p.getChannel())){
