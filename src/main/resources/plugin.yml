@@ -192,7 +192,7 @@ permissions:
             bungeesuite.chat.command.channelinfo: true
             bungeesuite.chat.command.ignore: true
             bungeesuite.chat.command.ignores: true
-            bungeesuite.chat.command.mesage: true
+            bungeesuite.chat.command.message: true
             bungeesuite.chat.command.reply: true
     bungeesuite.chat.vip:
         description: Gives the player access to the vip commands
