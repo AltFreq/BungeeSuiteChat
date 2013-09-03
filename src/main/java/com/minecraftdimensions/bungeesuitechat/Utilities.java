@@ -25,35 +25,25 @@ public class Utilities {
 		format = format.replace("{shortname}", ServerData.getServerShortName());
 		format = format.replace("{world}", player.getWorld().getName());
 		format = format.replace("{server}", ServerData.getServerName());
-		String prefix = "";
-		String suffix = "";
-		String group = "";
+		
 		if(BungeeSuiteChat.usingVault){
-			group = BungeeSuiteChat.CHAT.getPrimaryGroup(player);
-			if (group == null) {
-				group = "";
-			}
-			if (BungeeSuiteChat.CHAT.getPlayerPrefix(player) != null)
-				prefix = BungeeSuiteChat.CHAT.getPlayerPrefix(player);
-			else if (BungeeSuiteChat.CHAT.getGroupPrefix(player.getWorld(), group) != null) {
-				prefix = BungeeSuiteChat.CHAT.getGroupPrefix(player.getWorld(), group);
-			}
-			if (BungeeSuiteChat.CHAT.getPlayerSuffix(player) != null)
-				suffix = BungeeSuiteChat.CHAT.getPlayerSuffix(player);
-			else if (BungeeSuiteChat.CHAT.getGroupSuffix(player.getWorld(), group) != null) {
-				suffix = BungeeSuiteChat.CHAT.getGroupSuffix(player.getWorld(), group);
-			}
+			format = format.replace("{permgroup}", PrefixSuffixManager.getPlayersPermGroup(player));
+			format = format.replace("{permgroupsuffix}", PrefixSuffixManager.getPlayersPermGroupSuffix(player));
+			format = format.replace("{permplayersuffix}", PrefixSuffixManager.getPlayersPermSuffix(player));
+			format = format.replace("{permgroupprefix}", PrefixSuffixManager.getPlayersGroupPrefix(player));
+			format = format.replace("{permplayerprefix}", PrefixSuffixManager.getPlayersPermPrefix(player));
 		}
-		if(PrefixSuffixManager.playerHasPrefix(player)){
-		group = PrefixSuffixManager.getPlayersPrefixGroup(player);
-		prefix =PrefixSuffixManager.getPlayersPrefix(player);
+		if(PrefixSuffixManager.suffix){
+			String group = PrefixSuffixManager.getPlayersSuffixGroup(player);
+			format = format.replace("{suffixgroup}", PrefixSuffixManager.getPlayersSuffixGroup(player));
+			format = format.replace("{suffix}", PrefixSuffixManager.getPlayersSuffix(group));
 		}
-		if(PrefixSuffixManager.playerHasSuffix(player)){
-		suffix = PrefixSuffixManager.getPlayersSuffix(player);
+		if(PrefixSuffixManager.prefix){
+			String group = PrefixSuffixManager.getPlayersPrefixGroup(player);
+			format = format.replace("{prefixgroup}", PrefixSuffixManager.getPlayersPrefixGroup(player));
+			format = format.replace("{prefix}", PrefixSuffixManager.getPlayersPrefix(group));
 		}
-		format = format.replace("{group}", group);
-		format = format.replace("{suffix}", suffix);
-		format = format.replace("{prefix}", prefix);
+
 		format = format.replace("{message}", "%2$s");
 		return colorize(format);
 	}

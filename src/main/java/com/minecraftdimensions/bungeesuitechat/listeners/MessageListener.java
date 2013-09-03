@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
@@ -79,11 +81,24 @@ public class MessageListener implements PluginMessageListener {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			for(int i=0;i<prefix.length;i+=2){
-				PrefixSuffixManager.prefixes.put(prefix[i], prefix[i+1]);
+			if(prefix.length>1){
+				for(int i=0;i<prefix.length;i+=2){
+					PrefixSuffixManager.prefixes.put(prefix[i], prefix[i+1]);
+					Bukkit.getPluginManager().addPermission(new Permission("bungeesuite.chat.prefix."+prefix[i],"Gives access to the "+prefix[i+1]+" prefix", PermissionDefault.FALSE));
+				}
+				PrefixSuffixManager.prefix = true;
 			}
-			for(int i=0;i<suffix.length;i+=2){
-				PrefixSuffixManager.suffixes.put(suffix[i], suffix[i+1]);
+			if(suffix.length>1){
+				for(int i=0;i<suffix.length;i+=2){
+					PrefixSuffixManager.suffixes.put(suffix[i], suffix[i+1]);
+					Bukkit.getPluginManager().addPermission(new Permission("bungeesuite.chat.suffix."+suffix[i],"Gives access to the "+suffix[i+1]+" suffix", PermissionDefault.FALSE));
+				}
+				PrefixSuffixManager.suffix = true;
+			}
+			for(Permission p :Bukkit.getPluginManager().getPermissions()){
+				if(p.getName().startsWith("bungeesuite")){
+				System.out.println(p.getName()+" default= " + p.getDefault().toString());
+				}
 			}
 		}
 		if(channel.equals("SendPlayersIgnores")){
