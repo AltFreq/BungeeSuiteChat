@@ -34,6 +34,7 @@ public class ChannelManager {
 			removeChannel(c.getName());
 		}
 		channels.add(c);
+		recievedChannels = true;
 	}
 	
 	private static void removeChannel(String name) {
@@ -67,15 +68,6 @@ public class ChannelManager {
 		return null;
 	}
 	
-	public static boolean checkDefaultChannels(){
-		if(!recievedChannels){
-			if(channelExists("Global")){
-				recievedChannels = true;
-			}
-		}
-		return recievedChannels;
-	}
-	
 	public static boolean channelExists(String channel){
 		for(Channel c: channels){
 			if(c.getName().equals(channel)){
@@ -94,6 +86,7 @@ public class ChannelManager {
 			s.printStackTrace();
 		}
 		new PluginMessageTask(b).runTaskAsynchronously(BungeeSuiteChat.instance);	
+		System.out.println("Getting default channels");
 	}
 	
 	public static void cleanChannels() {

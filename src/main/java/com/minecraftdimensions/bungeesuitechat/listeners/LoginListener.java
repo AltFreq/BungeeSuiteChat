@@ -32,9 +32,7 @@ public class LoginListener implements Listener {
 			PermissionsManager.addUserPermissions(e.getPlayer());
 		}
 		if(!ChannelManager.recievedChannels){
-			if(!ChannelManager.checkDefaultChannels()){
-				ChannelManager.requestChannels();
-			}
+			ChannelManager.requestChannels();
 		}
 		Bukkit.getScheduler().runTaskLaterAsynchronously(BungeeSuiteChat.instance, new Runnable(){
 
