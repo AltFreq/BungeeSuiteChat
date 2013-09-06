@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class MessageListener implements PluginMessageListener {
 
     @Override
-    public void onPluginMessageReceived( String pluginChannel, Player reciever, byte[] message ) {
+    public void onPluginMessageReceived( String pluginChannel, Player receiver, byte[] message ) {
         if ( !pluginChannel.equalsIgnoreCase( BungeeSuiteChat.INCOMING_PLUGIN_CHANNEL ) )
             return;
         DataInputStream in = new DataInputStream( new ByteArrayInputStream( message ) );
@@ -55,7 +55,7 @@ public class MessageListener implements PluginMessageListener {
             return;
         }
         if ( channel.equals( "SendChannel" ) ) {
-        	System.out.println("Got channels!");
+            System.out.println( "Got channels!" );
             try {
                 ChannelManager.addChannel( in.readUTF() );
             } catch ( IOException e ) {
@@ -104,7 +104,7 @@ public class MessageListener implements PluginMessageListener {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            final ArrayList<String> ignores = new ArrayList<String>();
+            final ArrayList<String> ignores = new ArrayList<>();
             for ( String s : ignoresString ) {
                 ignores.add( s );
             }
