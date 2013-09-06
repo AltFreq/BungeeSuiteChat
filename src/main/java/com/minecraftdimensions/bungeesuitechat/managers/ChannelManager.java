@@ -291,7 +291,7 @@ public class ChannelManager {
     }
 
     public static void getGlobalChat( String player, String message ) {
-        Collection<BSPlayer> recipients = new ArrayList<>();
+        Collection<BSPlayer> recipients = new ArrayList<BSPlayer>();
         recipients.addAll( ChannelManager.getBSGlobalPlayers() );
         recipients.removeAll( getBSIgnores( player ) );
         for ( BSPlayer p : recipients ) {
