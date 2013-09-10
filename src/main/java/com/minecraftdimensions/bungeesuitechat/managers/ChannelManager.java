@@ -30,9 +30,6 @@ public class ChannelManager {
             removeChannel( c.getName() );
         }
         channels.add( c );
-        if ( !receivedChannels ) {
-            receivedChannels = true;
-        }
     }
 
     private static void removeChannel( String name ) {

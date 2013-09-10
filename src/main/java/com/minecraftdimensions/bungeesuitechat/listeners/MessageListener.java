@@ -55,7 +55,9 @@ public class MessageListener implements PluginMessageListener {
             return;
         }
         if ( channel.equals( "SendChannel" ) ) {
-            System.out.println( "Got channels!" );
+        	if(!ChannelManager.receivedChannels){
+        		ChannelManager.receivedChannels = true;
+        	}
             try {
                 ChannelManager.addChannel( in.readUTF() );
             } catch ( IOException e ) {
