@@ -23,7 +23,6 @@ public class BungeeSuiteChat extends JavaPlugin {
     public static Chat CHAT = null;
     public static boolean usingVault;
     public static boolean factionChat = false;
-    public static String serverName;
 
     @Override
     public void onEnable() {

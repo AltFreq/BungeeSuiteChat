@@ -14,7 +14,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatListener implements Listener {
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler( priority = EventPriority.LOWEST )
     public void setFormatChat( AsyncPlayerChatEvent e ) {
         if ( e.isCancelled() ) {
             return;
@@ -56,7 +56,7 @@ public class ChatListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler( priority = EventPriority.HIGH )
     public void setVariables( AsyncPlayerChatEvent e ) {
         if ( e.isCancelled() ) {
             return;
@@ -65,8 +65,11 @@ public class ChatListener implements Listener {
         e.setMessage( Utilities.SetMessage( e.getPlayer(), e.getMessage() ) );
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler( priority = EventPriority.MONITOR )
     public void setLogChat( AsyncPlayerChatEvent e ) {
+        if ( e.isCancelled() ) {
+            return;
+        }
         BSPlayer p = PlayerManager.getPlayer( e.getPlayer() );
         if ( p == null ) {
             e.setCancelled( true );
