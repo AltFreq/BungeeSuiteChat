@@ -65,9 +65,6 @@ public class Utilities {
 	}
 
 	public static String SetMessage(Player player, String message) {
-		if(player.hasPermission("bungeesuite.chat.admincolor")){
-			message = colorize(ServerData.getAdminColor())+message;
-		}
 		if(player.hasPermission("bungeesuite.chat.color")){
 			message = colorize(message);
 		}

@@ -9,11 +9,10 @@ public class ServerData {
 	static boolean forceChannel;
 	static boolean usingFactionChannels;
 	static int localDistance;
-	static String adminColor;
 	static boolean connectionMessages = true;
 	
 	
-	public ServerData(String name, String shortNam, boolean force, String channel, boolean facs, int localDis, String adminCol, boolean conMessages){
+	public ServerData(String name, String shortNam, boolean force, String channel, boolean facs, int localDis, boolean conMessages){
 		serverName = name;
 		shortName = shortNam;
 		forceChannel = force;
@@ -23,7 +22,6 @@ public class ServerData {
 			BungeeSuiteChat.instance.setupFactions();
 		}
 		localDistance = localDis;
-		adminColor = adminCol;
 		connectionMessages = conMessages;
 	}
 	
@@ -35,8 +33,7 @@ public class ServerData {
 		forcedChannel = data[3];
 		usingFactionChannels = Boolean.parseBoolean(data[4]);
 		localDistance = Integer.parseInt(data[5]);
-		adminColor = data[6];
-		connectionMessages = Boolean.parseBoolean(data[7]);
+		connectionMessages = Boolean.parseBoolean(data[6]);
 	}
 	
 	public static String getServerName(){
@@ -62,15 +59,12 @@ public class ServerData {
 		return localDistance;
 	}
 	
-	public static String getAdminColor(){
-		return adminColor;
-	}
 	
 	public static boolean getConnectionMessage(){
 		return connectionMessages;
 	}
 
 	public static String serialise() {
-		return serverName+"~"+shortName+"~"+forceChannel+"~"+forcedChannel+"~"+usingFactionChannels+"~"+localDistance+"~"+adminColor+"~"+connectionMessages;
+		return serverName+"~"+shortName+"~"+forceChannel+"~"+forcedChannel+"~"+usingFactionChannels+"~"+localDistance+"~"+connectionMessages;
 	}
 }
