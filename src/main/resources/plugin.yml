@@ -75,7 +75,7 @@ commands:
         usage: /<command> (message)
     message:
         description: Send a private message to a player
-        aliases: [tell,t,msg,pm]
+        aliases: [tell,msg,pm]
         permission: bungeesuite.chat.command.message
         permission-message: §cYou do not have permission for this command
         usage: /<command> (message)
@@ -194,6 +194,7 @@ permissions:
             bungeesuite.chat.command.ignores: true
             bungeesuite.chat.command.message: true
             bungeesuite.chat.command.reply: true
+            bungeesuite.chat.command.toggle: true
     bungeesuite.chat.vip:
         description: Gives the player access to the vip commands
         children:
