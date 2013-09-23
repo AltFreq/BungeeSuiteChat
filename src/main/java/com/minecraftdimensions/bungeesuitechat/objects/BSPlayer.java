@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
 import com.minecraftdimensions.bungeesuitechat.managers.ChannelManager;
 import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
 
@@ -44,6 +45,40 @@ public class BSPlayer {
 		}
 		if(tempname.endsWith("null")){
 			tempname = null;
+		}
+	}
+
+	public BSPlayer(String name, String channel, boolean isMuted, String nickname, String tempName,
+			boolean isSpying, boolean isDND, boolean isAFK) {
+		playername = name;
+		this.channel = channel;
+		muted = isMuted;
+		if(nickname.equals("")){
+			this.nickname = null;
+		}else{
+			this.nickname = nickname;
+		}
+		if(tempName.equals("")){
+			this.tempname = null;
+		}else{
+			this.tempname=tempName;
+		}
+		this.chatspying = isSpying;
+		this.dnd = isDND;
+		this.afk = isAFK;
+		if(getPlayer()!=null){
+			getPlayer().setDisplayName(getDisplayingName());
+		}else{
+			Bukkit.getScheduler().runTaskLaterAsynchronously(BungeeSuiteChat.instance, new Runnable(){
+
+				@Override
+				public void run() {
+					if(getPlayer()!=null){
+						getPlayer().setDisplayName(getDisplayingName());
+					}
+				}
+				
+			}, 20);
 		}
 	}
 
@@ -87,6 +122,9 @@ public class BSPlayer {
 		return nickname!=null;
 	}
 	public String getNickname(){
+		if(nickname==null){
+			return "";
+		}
 		return nickname;
 	}
 	public void setNickname(String nick){
@@ -126,10 +164,10 @@ public class BSPlayer {
 		if(tempname!=null){
 			return tempname;
 		}else
-		if(getNickname()!=null){
-			return getNickname();
+		if(nickname!=null){
+			return nickname;
 		}else{
-			return getName();
+			return playername;
 		}
 	}
 

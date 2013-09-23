@@ -48,7 +48,7 @@ public class MessageListener implements PluginMessageListener {
         }
         if ( channel.equals( "SendPlayer" ) ) {
             try {
-                PlayerManager.addPlayer( new BSPlayer( in.readUTF() ) );
+                PlayerManager.addPlayer( new BSPlayer( in.readUTF(), in.readUTF(), in.readBoolean(), in.readUTF(), in.readUTF(), in.readBoolean(), in.readBoolean(),in.readBoolean() ) );
             } catch ( IOException e ) {
                 e.printStackTrace();
             }
