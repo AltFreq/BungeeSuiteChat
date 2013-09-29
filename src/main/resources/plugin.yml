@@ -5,7 +5,7 @@ description: Part of the BungeeSuite this plugin handles all player chat
 author: Bloodsplat
 website: http://www.spigotmc.org/resources/bungeesuite.9/
 prefix: BungeeSuite
-softdepend: [Factions]
+softdepend: [Factions, TownyChat, Towny]
 commands:
     admin:
         description: Send messages/toggle to the admin channel

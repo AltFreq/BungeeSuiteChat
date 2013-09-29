@@ -11,6 +11,7 @@ import com.minecraftdimensions.bungeesuitechat.listeners.*;
 import com.minecraftdimensions.bungeesuitechat.managers.ChannelManager;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,8 +22,10 @@ public class BungeeSuiteChat extends JavaPlugin {
     public static String INCOMING_PLUGIN_CHANNEL = "BungeeSuiteChat";
     public static BungeeSuiteChat instance;
     public static Chat CHAT = null;
+    public static com.palmergames.bukkit.TownyChat.Chat tc = null;
     public static boolean usingVault;
     public static boolean factionChat = false;
+    public static boolean townyChat = false;
 
     @Override
     public void onEnable() {
@@ -31,6 +34,7 @@ public class BungeeSuiteChat extends JavaPlugin {
         usingVault = setupVault();
         registerListeners();
         startTasks();
+        setupTownyChat();
     }
 
     private void startTasks() {
@@ -52,6 +56,17 @@ public class BungeeSuiteChat extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents( new AFKListener(), this );
         Bukkit.getMessenger().registerIncomingPluginChannel( this, INCOMING_PLUGIN_CHANNEL, new MessageListener() );
 
+    }
+    
+    public void setupTownyChat(){
+    	com.palmergames.bukkit.TownyChat.Chat towny = (com.palmergames.bukkit.TownyChat.Chat) Bukkit.getPluginManager().getPlugin("TownyChat");
+    	if(towny!=null)
+    	{
+    		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"TownyChat detected, hooking in!");
+    		townyChat = true;
+    		tc = towny;
+    	}
+    	
     }
 
     public void setupFactions() {

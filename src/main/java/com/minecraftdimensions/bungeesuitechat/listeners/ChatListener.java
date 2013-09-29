@@ -1,10 +1,14 @@
 package com.minecraftdimensions.bungeesuitechat.listeners;
 
+import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
 import com.minecraftdimensions.bungeesuitechat.Utilities;
 import com.minecraftdimensions.bungeesuitechat.managers.ChannelManager;
 import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
 import com.minecraftdimensions.bungeesuitechat.objects.BSPlayer;
 import com.minecraftdimensions.bungeesuitechat.objects.ServerData;
+import com.palmergames.bukkit.TownyChat.channels.Channel;
+import com.palmergames.bukkit.TownyChat.channels.channelTypes;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -75,17 +79,24 @@ public class ChatListener implements Listener {
             e.setCancelled( true );
             return;
         }
+        if(BungeeSuiteChat.townyChat){
+        	for (Channel channel : BungeeSuiteChat.tc.getChannelsHandler().getAllChannels().values()) {
+				if (BungeeSuiteChat.tc.getTowny().hasPlayerMode(e.getPlayer(), channel.getName())) {
+	            	 e.getRecipients().addAll( PlayerManager.getChatSpies() );
+	                 Utilities.logChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
+	                 return;
+				}
+        	}
+        }
         if ( ChannelManager.isGlobal( p.getChannel() ) ) {
             ChannelManager.sendGlobalChat( e.getPlayer().getName(), String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
         } else if ( ChannelManager.isAdmin( p.getChannel() ) ) {
             ChannelManager.sendAdminChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
-        } else if ( p.getChannel().isDefault ) {
-            e.getRecipients().addAll( PlayerManager.getChatSpies() );
-            Utilities.logChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
         } else {
             e.getRecipients().addAll( PlayerManager.getChatSpies() );
-            //channel chat sender
-        }
+            Utilities.logChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
+        } 
+
     }
 
 
