@@ -7,7 +7,6 @@ import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
 import com.minecraftdimensions.bungeesuitechat.objects.BSPlayer;
 import com.minecraftdimensions.bungeesuitechat.objects.ServerData;
 import com.palmergames.bukkit.TownyChat.channels.Channel;
-import com.palmergames.bukkit.TownyChat.channels.channelTypes;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

@@ -131,7 +131,7 @@ commands:
         usage: /<command> (player) (time in minutes)
     toggle:
         description: Toggles through your available channels
-        aliases: [tc,togglechannel,channeltoggle, ct]
+        aliases: [togglechannel,channeltoggle, ct]
         permission: bungeesuite.chat.command.toggle
         permission-message: §cYou do not have permission for this command
         usage: /<command>
