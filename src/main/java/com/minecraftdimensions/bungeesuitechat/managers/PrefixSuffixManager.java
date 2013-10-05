@@ -50,6 +50,19 @@ public class PrefixSuffixManager {
         }
         return suffix;
     }
+    
+    
+    public static String getPlayersPermGroupPrefix( Player player ) {
+        String group = BungeeSuiteChat.CHAT.getPrimaryGroup( player );
+        String prefix = "";
+        if ( !group.equals( "" ) ) {
+            prefix = BungeeSuiteChat.CHAT.getGroupPrefix( player.getWorld(), group );
+        }
+        if ( prefix == null ) {
+            return "";
+        }
+        return prefix;
+    }
 
 
     public static String getPlayersGroupPrefix( Player player ) {
@@ -65,7 +78,7 @@ public class PrefixSuffixManager {
     }
 
 
-    public static CharSequence getPlayersPermPrefix( Player player ) {
+    public static String getPlayersPermPrefix( Player player ) {
         String prefix = BungeeSuiteChat.CHAT.getPlayerPrefix( player );
         if ( prefix == null ) {
             return "";
@@ -109,6 +122,35 @@ public class PrefixSuffixManager {
         }
         return suffix;
     }
+
+
+	public static String getPermPrefix(Player player) {
+		String p= getPlayersPermPrefix(player);
+		if(!p.equals("")){
+			return p;
+		}else{
+			String g = getPlayersPermGroupPrefix(player);
+			if(!g.equals("")){
+				return g;
+			}else{
+				return "";
+			}
+		}
+	}
+	
+	public static String getPermSuffix(Player player) {
+		String p= getPlayersPermSuffix(player);
+		if(!p.equals("")){
+			return p;
+		}else{
+			String g = getPlayersPermGroupSuffix(player);
+			if(!g.equals("")){
+				return g;
+			}else{
+				return "";
+			}
+		}
+	}
 
 
 }

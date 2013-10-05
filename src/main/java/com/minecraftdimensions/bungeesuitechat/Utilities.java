@@ -30,6 +30,8 @@ public class Utilities {
 			format = format.replace("{permgroup}", PrefixSuffixManager.getPlayersPermGroup(player));
 			format = format.replace("{permgroupsuffix}", PrefixSuffixManager.getPlayersPermGroupSuffix(player));
 			format = format.replace("{permplayersuffix}", PrefixSuffixManager.getPlayersPermSuffix(player));
+			format = format.replace("{permprefix}", PrefixSuffixManager.getPermPrefix(player));
+			format = format.replace("{permsuffix}", PrefixSuffixManager.getPermSuffix(player));
 			format = format.replace("{permgroupprefix}", PrefixSuffixManager.getPlayersGroupPrefix(player));
 			format = format.replace("{permplayerprefix}", PrefixSuffixManager.getPlayersPermPrefix(player));
 		}
