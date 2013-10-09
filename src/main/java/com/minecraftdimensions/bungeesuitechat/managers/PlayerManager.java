@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 public class PlayerManager {
 
@@ -89,10 +90,10 @@ public class PlayerManager {
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
     }
 
-    public static ArrayList<Player> getChatSpies(Player player) {
+    public static ArrayList<Player> getChatSpies(Player player, Set<Player> set) {
         ArrayList<Player> spies = new ArrayList<Player>();
         for ( BSPlayer p : onlinePlayers.values() ) {
-            if ( p.isChatSpying() &&  !p.getName().equals(player.getName())) {
+            if ( p.isChatSpying() &&  !set.contains(p) && !p.getName().equals(player.getName())) {
                 spies.add( p.getPlayer() );
             }
         }
