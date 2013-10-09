@@ -32,6 +32,9 @@ public class ServerData {
 		forceChannel = Boolean.parseBoolean(data[2]);
 		forcedChannel = data[3];
 		usingFactionChannels = Boolean.parseBoolean(data[4]);
+		if(usingFactionChannels){
+			BungeeSuiteChat.instance.setupFactions();
+		}
 		localDistance = Integer.parseInt(data[5]);
 		connectionMessages = Boolean.parseBoolean(data[6]);
 	}

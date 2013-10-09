@@ -73,6 +73,7 @@ public class BungeeSuiteChat extends JavaPlugin {
         Factions factions = ( Factions ) Bukkit.getPluginManager().getPlugin( "Factions" );
         if ( factions != null ) {
             if ( !factions.getDescription().getVersion().startsWith( "1" ) ) {
+            	Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Factions detected, hooking in!");
                 factionChat = true;
                 getCommand( "factionchat" ).setExecutor( new FactionChatCommand() );
                 getCommand( "factionchatally" ).setExecutor( new FactionChatAllyCommand() );

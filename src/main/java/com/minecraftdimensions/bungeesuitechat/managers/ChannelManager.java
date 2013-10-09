@@ -335,19 +335,36 @@ public class ChannelManager {
     }
 
     public static boolean playerHasPermissionToTalk( BSPlayer p ) {
-        Channel c = p.getChannel();
-        if ( c.isDefault )
-            if ( ChannelManager.isGlobal( c ) ) {
-                return p.getPlayer().hasPermission( "bungeesuite.chat.channel.global" );
-            } else if ( ChannelManager.isServer( c ) ) {
-                return p.getPlayer().hasPermission( "bungeesuite.chat.channel.server" );
-            } else if ( ChannelManager.isLocal( c ) ) {
-                return p.getPlayer().hasPermission( "bungeesuite.chat.channel.local" );
-            } else {
-                return ChannelManager.isAdmin( c ) && p.getPlayer().hasPermission( "bungeesuite.chat.channel.admin" );
-            }
-        else
-            return p.getPlayer().hasPermission( "bungeesuite.chat.channel.custom" );
+		Channel c = p.getChannel();
+		if (c.isDefault) {
+			if (ChannelManager.isGlobal(c)) {
+				return p.getPlayer().hasPermission(
+						"bungeesuite.chat.channel.global");
+			} else if (ChannelManager.isServer(c)) {
+				return p.getPlayer().hasPermission(
+						"bungeesuite.chat.channel.server");
+			} else if (ChannelManager.isLocal(c)) {
+				return p.getPlayer().hasPermission(
+						"bungeesuite.chat.channel.local");
+			} else if (BungeeSuiteChat.factionChat
+					&& ChannelManager.isFactionChannel(c)) {
+				if (ChannelManager.isFaction(c)) {
+					return p.getPlayer().hasPermission(
+							"bungeesuite.chat.channel.faction");
+				} else if (ChannelManager.isFactionAlly(c)) {
+					return p.getPlayer().hasPermission(
+							"bungeesuite.chat.channel.factionally");
+				}
+			} else {
+				return ChannelManager.isAdmin(c)
+						&& p.getPlayer().hasPermission(
+								"bungeesuite.chat.channel.admin");
+			}
+		} else {
+			return p.getPlayer().hasPermission(
+					"bungeesuite.chat.channel.custom");
+		}
+		return false;
 
     }
 
