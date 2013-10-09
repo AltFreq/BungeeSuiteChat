@@ -20,8 +20,9 @@ public class AFKListener implements Listener {
 		if(p==null){
 			return;
 		}
-		if(p.isAFK()){
+		if(p.isAFK() && e.getMessage().equalsIgnoreCase("/afk") || e.getMessage().equalsIgnoreCase("/away") || e.getMessage().equalsIgnoreCase("/brb")){
 			PlayerManager.setPlayerAFK(e.getPlayer());
+			e.setCancelled(true);
 		}
 	}
 	

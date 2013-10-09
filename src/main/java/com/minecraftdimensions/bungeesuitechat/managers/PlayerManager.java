@@ -53,8 +53,11 @@ public class PlayerManager {
         return onlinePlayers.get( sender.getName() );
     }
 
-    public static void setPlayerAFK( CommandSender sender ) {
+    public static void setPlayerAFK( Player sender ) {
         BSPlayer p = getPlayer( sender );
+        if(p==null){
+        	return;
+        }
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream( b );
         try {
@@ -67,6 +70,11 @@ public class PlayerManager {
             s.printStackTrace();
         }
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
+        if(p.isAFK()){
+        	p.setAFK(false);
+        }else{
+        	p.setAFK(true);	
+        }
     }
 
     public static void reloadPlayer( String player ) {
