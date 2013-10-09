@@ -81,7 +81,7 @@ public class ChatListener implements Listener {
         if(BungeeSuiteChat.townyChat){
         	for (Channel channel : BungeeSuiteChat.tc.getChannelsHandler().getAllChannels().values()) {
 				if (BungeeSuiteChat.tc.getTowny().hasPlayerMode(e.getPlayer(), channel.getName())) {
-	            	 e.getRecipients().addAll( PlayerManager.getChatSpies() );
+	            	 e.getRecipients().addAll( PlayerManager.getChatSpies(e.getPlayer()) );
 	                 Utilities.logChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
 	                 return;
 				}
@@ -92,7 +92,7 @@ public class ChatListener implements Listener {
         } else if ( ChannelManager.isAdmin( p.getChannel() ) ) {
             ChannelManager.sendAdminChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
         } else {
-            e.getRecipients().addAll( PlayerManager.getChatSpies() );
+            e.getRecipients().addAll( PlayerManager.getChatSpies(e.getPlayer()) );
             Utilities.logChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
         } 
 

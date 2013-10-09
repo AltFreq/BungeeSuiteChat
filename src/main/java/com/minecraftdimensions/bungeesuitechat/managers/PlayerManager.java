@@ -81,10 +81,10 @@ public class PlayerManager {
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
     }
 
-    public static ArrayList<Player> getChatSpies() {
+    public static ArrayList<Player> getChatSpies(Player player) {
         ArrayList<Player> spies = new ArrayList<Player>();
         for ( BSPlayer p : onlinePlayers.values() ) {
-            if ( p.isChatSpying() ) {
+            if ( p.isChatSpying() &&  !p.getName().equals(player.getName())) {
                 spies.add( p.getPlayer() );
             }
         }
