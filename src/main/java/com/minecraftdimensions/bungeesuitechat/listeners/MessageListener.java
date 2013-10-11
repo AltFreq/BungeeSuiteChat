@@ -130,7 +130,7 @@ public class MessageListener implements PluginMessageListener {
             }
             return;
         }
-        if ( channel.equals( "ReloadChat" ) ) {
+        if ( channel.equals( "Reload" ) ) {
             ChannelManager.reload();
             return;
         }
