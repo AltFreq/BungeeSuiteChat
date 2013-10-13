@@ -46,7 +46,6 @@ public class MessageListener implements PluginMessageListener {
             try {
                 p = in.readUTF();
             } catch ( IOException e ) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
             if ( p != null ) {
                 Player player = Bukkit.getPlayer( p );
