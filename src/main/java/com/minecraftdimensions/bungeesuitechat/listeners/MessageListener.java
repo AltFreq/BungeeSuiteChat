@@ -42,14 +42,17 @@ public class MessageListener implements PluginMessageListener {
             return;
         }
         if ( channel.equals( "GetVersion" ) ) {
-            Player p = null;
+            String p = null;
             try {
-                p = Bukkit.getPlayer( in.readUTF() );
+                p = in.readUTF();
             } catch ( IOException e ) {
-                e.printStackTrace();
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-            assert p != null;
-            p.sendMessage( ChatColor.RED + "Chat - " + ChatColor.GOLD + BungeeSuiteChat.instance.getDescription().getVersion() );
+            if ( p != null ) {
+                Player player = Bukkit.getPlayer( p );
+                player.sendMessage( ChatColor.RED + "Chat - " + ChatColor.GOLD + BungeeSuiteChat.instance.getDescription().getVersion() );
+            }
+            PlayerManager.sendVersion();
             Bukkit.getConsoleSender().sendMessage( ChatColor.RED + "Chat - " + ChatColor.GOLD + BungeeSuiteChat.instance.getDescription().getVersion() );
         }
         if ( channel.equals( "SendAdminChat" ) ) {
