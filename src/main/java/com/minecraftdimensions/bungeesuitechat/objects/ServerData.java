@@ -10,6 +10,7 @@ public class ServerData {
 	static boolean usingFactionChannels;
 	static int localDistance;
 	static boolean connectionMessages = true;
+	static String globalRegex;
 	
 	
 	public ServerData(String name, String shortNam, boolean force, String channel, boolean facs, int localDis, boolean conMessages){
@@ -37,6 +38,7 @@ public class ServerData {
 		}
 		localDistance = Integer.parseInt(data[5]);
 		connectionMessages = Boolean.parseBoolean(data[6]);
+		globalRegex = data[7];
 	}
 	
 	public static String getServerName(){
@@ -69,5 +71,9 @@ public class ServerData {
 
 	public static String serialise() {
 		return serverName+"~"+shortName+"~"+forceChannel+"~"+forcedChannel+"~"+usingFactionChannels+"~"+localDistance+"~"+connectionMessages;
+	}
+
+	public static String getGlobalRegex() {
+		return globalRegex;
 	}
 }
