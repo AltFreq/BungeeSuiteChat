@@ -39,7 +39,7 @@ public class AFKListener implements Listener {
 	
 	@EventHandler
 	public void playerMove(PlayerMoveEvent e) {
-		if(!e.getTo().equals(e.getFrom())){
+		if(!e.getTo().getBlock().equals(e.getFrom().getBlock())){
 			BSPlayer p =PlayerManager.getPlayer(e.getPlayer());
 			if(p==null){
 				return;
