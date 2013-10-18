@@ -7,6 +7,7 @@ import com.minecraftdimensions.bungeesuitechat.managers.PrefixSuffixManager;
 import com.minecraftdimensions.bungeesuitechat.objects.BSPlayer;
 import com.minecraftdimensions.bungeesuitechat.objects.ServerData;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
@@ -16,6 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MessageListener implements PluginMessageListener {
 
@@ -30,6 +32,7 @@ public class MessageListener implements PluginMessageListener {
         } catch ( IOException e ) {
             e.printStackTrace();
         }
+        assert channel != null;
         if ( channel.equals( "SendGlobalChat" ) ) {
             try {
                 ChannelManager.getGlobalChat( in.readUTF(), in.readUTF() );
@@ -37,6 +40,19 @@ public class MessageListener implements PluginMessageListener {
                 e.printStackTrace();
             }
             return;
+        }
+        if ( channel.equals( "GetVersion" ) ) {
+            String p = null;
+            try {
+                p = in.readUTF();
+            } catch ( IOException e ) {
+            }
+            if ( p != null ) {
+                Player player = Bukkit.getPlayer( p );
+                player.sendMessage( ChatColor.RED + "Chat - " + ChatColor.GOLD + BungeeSuiteChat.instance.getDescription().getVersion() );
+            }
+            PlayerManager.sendVersion();
+            Bukkit.getConsoleSender().sendMessage( ChatColor.RED + "Chat - " + ChatColor.GOLD + BungeeSuiteChat.instance.getDescription().getVersion() );
         }
         if ( channel.equals( "SendAdminChat" ) ) {
             try {
@@ -48,16 +64,16 @@ public class MessageListener implements PluginMessageListener {
         }
         if ( channel.equals( "SendPlayer" ) ) {
             try {
-                PlayerManager.addPlayer( new BSPlayer( in.readUTF(), in.readUTF(), in.readBoolean(), in.readUTF(), in.readUTF(), in.readBoolean(), in.readBoolean(),in.readBoolean() ) );
+                PlayerManager.addPlayer( new BSPlayer( in.readUTF(), in.readUTF(), in.readBoolean(), in.readUTF(), in.readUTF(), in.readBoolean(), in.readBoolean(), in.readBoolean() ) );
             } catch ( IOException e ) {
                 e.printStackTrace();
             }
             return;
         }
         if ( channel.equals( "SendChannel" ) ) {
-        	if(!ChannelManager.receivedChannels){
-        		ChannelManager.receivedChannels = true;
-        	}
+            if ( !ChannelManager.receivedChannels ) {
+                ChannelManager.receivedChannels = true;
+            }
             try {
                 ChannelManager.addChannel( in.readUTF() );
             } catch ( IOException e ) {
@@ -85,16 +101,16 @@ public class MessageListener implements PluginMessageListener {
                 if ( check ) {
                     PrefixSuffixManager.prefixes.put( group, affix );
                     PrefixSuffixManager.prefix = true;
-                    if(Bukkit.getPluginManager().getPermission("bungeesuite.chat.prefix." + group)==null){
-                    Bukkit.getPluginManager().addPermission( new Permission( "bungeesuite.chat.prefix." + group, "Gives access to the " + affix + " prefix", PermissionDefault.FALSE ) );
+                    if ( Bukkit.getPluginManager().getPermission( "bungeesuite.chat.prefix." + group ) == null ) {
+                        Bukkit.getPluginManager().addPermission( new Permission( "bungeesuite.chat.prefix." + group, "Gives access to the " + affix + " prefix", PermissionDefault.FALSE ) );
                     }
-                   } else {
+                } else {
                     PrefixSuffixManager.suffixes.put( group, affix );
                     PrefixSuffixManager.suffix = true;
-                    if(Bukkit.getPluginManager().getPermission("bungeesuite.chat.suffix." + group)==null){
-                    Bukkit.getPluginManager().addPermission( new Permission( "bungeesuite.chat.suffix." + group, "Gives access to the " + affix + " suffix", PermissionDefault.FALSE ) );
+                    if ( Bukkit.getPluginManager().getPermission( "bungeesuite.chat.suffix." + group ) == null ) {
+                        Bukkit.getPluginManager().addPermission( new Permission( "bungeesuite.chat.suffix." + group, "Gives access to the " + affix + " suffix", PermissionDefault.FALSE ) );
                     }
-                  }
+                }
             } catch ( IOException e ) {
                 e.printStackTrace();
             }
@@ -111,9 +127,7 @@ public class MessageListener implements PluginMessageListener {
                 e.printStackTrace();
             }
             final ArrayList<String> ignores = new ArrayList<>();
-            for ( String s : ignoresString ) {
-                ignores.add( s );
-            }
+            Collections.addAll( ignores, ignoresString );
             final String name = player;
             BSPlayer p = PlayerManager.getPlayer( player );
             if ( p != null ) {
@@ -132,10 +146,7 @@ public class MessageListener implements PluginMessageListener {
         }
         if ( channel.equals( "Reload" ) ) {
             ChannelManager.reload();
-            return;
         }
-
-
     }
 
 }

@@ -56,8 +56,8 @@ public class PlayerManager {
 
     public static void setPlayerAFK( Player sender ) {
         BSPlayer p = getPlayer( sender );
-        if(p==null){
-        	return;
+        if ( p == null ) {
+            return;
         }
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream( b );
@@ -71,10 +71,10 @@ public class PlayerManager {
             s.printStackTrace();
         }
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
-        if(p.isAFK()){
-        	p.setAFK(false);
-        }else{
-        	p.setAFK(true);	
+        if ( p.isAFK() ) {
+            p.setAFK( false );
+        } else {
+            p.setAFK( true );
         }
     }
 
@@ -90,10 +90,10 @@ public class PlayerManager {
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
     }
 
-    public static ArrayList<Player> getChatSpies(Player player, Set<Player> set) {
+    public static ArrayList<Player> getChatSpies( Player player, Set<Player> set ) {
         ArrayList<Player> spies = new ArrayList<Player>();
         for ( BSPlayer p : onlinePlayers.values() ) {
-            if ( p.isChatSpying() &&  !set.contains(p) && !p.getName().equals(player.getName())) {
+            if ( p.isChatSpying() && !set.contains( p ) && !p.getName().equals( player.getName() ) ) {
                 spies.add( p.getPlayer() );
             }
         }
@@ -254,4 +254,15 @@ public class PlayerManager {
 
     }
 
+    public static void sendVersion() {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream( b );
+        try {
+            out.writeUTF( "SendVersion" );
+            out.writeUTF( ChatColor.RED + "Chat - " + ChatColor.GOLD + BungeeSuiteChat.instance.getDescription().getVersion() );
+        } catch ( IOException s ) {
+            s.printStackTrace();
+        }
+        new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
+    }
 }

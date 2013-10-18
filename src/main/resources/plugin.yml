@@ -1,6 +1,6 @@
 name: Chat
 main : com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat
-version: 0.51
+version: ${project.version}b-${build.number}
 description: Part of the BungeeSuite this plugin handles all player chat
 author: Bloodsplat
 website: http://www.spigotmc.org/resources/bungeesuite.9/
