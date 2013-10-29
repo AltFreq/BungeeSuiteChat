@@ -1,22 +1,23 @@
 package com.minecraftdimensions.bungeesuitechat.tasks;
 
-import java.io.ByteArrayOutputStream;
-
+import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
+import java.io.ByteArrayOutputStream;
 
 
 public class PluginMessageTask extends BukkitRunnable {
     private final ByteArrayOutputStream bytes;
-    
-    public PluginMessageTask(ByteArrayOutputStream bytes) {
+
+    public PluginMessageTask( ByteArrayOutputStream bytes ) {
         this.bytes = bytes;
     }
 
     public void run() {
-        Bukkit.getOnlinePlayers()[0].sendPluginMessage(BungeeSuiteChat.instance, BungeeSuiteChat.OUTGOING_PLUGIN_CHANNEL, bytes.toByteArray());
+        if ( Bukkit.getOnlinePlayers().length > 0 ) {
+            Bukkit.getOnlinePlayers()[0].sendPluginMessage( BungeeSuiteChat.instance, BungeeSuiteChat.OUTGOING_PLUGIN_CHANNEL, bytes.toByteArray() );
+        }
     }
 
 }
