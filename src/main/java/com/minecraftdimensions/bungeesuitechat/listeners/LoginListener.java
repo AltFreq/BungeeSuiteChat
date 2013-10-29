@@ -16,8 +16,11 @@ import org.bukkit.event.player.PlayerLoginEvent;
 
 public class LoginListener implements Listener {
 
-    @EventHandler( priority = EventPriority.NORMAL )
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void setFormatChat( final PlayerLoginEvent e ) {
+        if ( !e.getResult().equals( PlayerLoginEvent.Result.ALLOWED ) ) {
+            return;
+        }
         if ( e.getPlayer().hasPermission( "bungeesuite.*" ) ) {
             PermissionsManager.addAllPermissions( e.getPlayer() );
         } else if ( e.getPlayer().hasPermission( "bungeesuite.admin" ) ) {
