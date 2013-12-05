@@ -33,7 +33,16 @@ public class LoginListener implements Listener {
             PermissionsManager.addUserPermissions( e.getPlayer() );
         }
         if ( !ChannelManager.receivedChannels ) {
-            ChannelManager.requestChannels();
+            Bukkit.getScheduler().runTaskLaterAsynchronously( BungeeSuiteChat.instance, new Runnable() {
+
+                @Override
+                public void run() {
+                    if ( !ChannelManager.receivedChannels ) {
+                        ChannelManager.requestChannels();
+                    }
+                }
+            }, 10L );
+
         }
         Bukkit.getScheduler().runTaskLaterAsynchronously( BungeeSuiteChat.instance, new Runnable() {
 
