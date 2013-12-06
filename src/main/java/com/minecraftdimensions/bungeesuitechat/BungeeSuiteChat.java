@@ -7,6 +7,9 @@ import com.minecraftdimensions.bungeesuitechat.commands.channel.*;
 import com.minecraftdimensions.bungeesuitechat.commands.factions.FactionChatAllyCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.factions.FactionChatCommand;
 import com.minecraftdimensions.bungeesuitechat.commands.factions.FactionChatFactionCommand;
+import com.minecraftdimensions.bungeesuitechat.commands.towny.TownyChatCommand;
+import com.minecraftdimensions.bungeesuitechat.commands.towny.TownyChatNationCommand;
+import com.minecraftdimensions.bungeesuitechat.commands.towny.TownyChatTownCommand;
 import com.minecraftdimensions.bungeesuitechat.listeners.*;
 import com.minecraftdimensions.bungeesuitechat.managers.ChannelManager;
 import net.milkbowl.vault.chat.Chat;
@@ -60,7 +63,12 @@ public class BungeeSuiteChat extends JavaPlugin {
 
     public void setupTowny() {
         towny = Bukkit.getPluginManager().getPlugin( "Towny" ) != null;
-        Bukkit.getConsoleSender().sendMessage( ChatColor.GREEN + "Towny detected, hooking in!" );
+        if ( towny ) {
+            Bukkit.getConsoleSender().sendMessage( ChatColor.GREEN + "Towny detected, hooking in!" );
+            getCommand( "townychat" ).setExecutor( new TownyChatCommand() );
+            getCommand( "townychattown" ).setExecutor( new TownyChatTownCommand() );
+            getCommand( "townychatnation" ).setExecutor( new TownyChatNationCommand() );
+        }
     }
 
     public void setupFactions() {

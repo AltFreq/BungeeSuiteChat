@@ -6,7 +6,6 @@ public class ServerData {
     static String shortName;
     static int localDistance;
     static boolean connectionMessages;
-    static boolean usingFactionChannels;
 
 
     public ServerData( String name, String shortName, int localDistance, boolean connectionMessages ) {
@@ -22,14 +21,6 @@ public class ServerData {
 
     public static String getServerShortName() {
         return shortName;
-    }
-
-    public static boolean usingFactions() {
-        return usingFactionChannels;
-    }
-
-    public static void useFactions() {
-        usingFactionChannels = true;
     }
 
     public static int getLocalDistance() {

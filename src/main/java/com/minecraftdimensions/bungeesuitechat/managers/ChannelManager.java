@@ -9,6 +9,9 @@ import com.minecraftdimensions.bungeesuitechat.objects.BSPlayer;
 import com.minecraftdimensions.bungeesuitechat.objects.Channel;
 import com.minecraftdimensions.bungeesuitechat.objects.ServerData;
 import com.minecraftdimensions.bungeesuitechat.tasks.PluginMessageTask;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.TownyUniverse;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -114,6 +117,10 @@ public class ChannelManager {
 
     public static boolean isFactionChannel( Channel channel ) {
         return channel.getName().equals( "Faction" ) || channel.getName().equals( "FactionAlly" );
+    }
+
+    public static boolean isTownyChannel( Channel channel ) {
+        return channel.getName().equals( "Town" ) || channel.getName().equals( "Nation" );
     }
 
     public static boolean isFaction( Channel channel ) {
@@ -245,12 +252,45 @@ public class ChannelManager {
         getDefaultChannels();
     }
 
+    public static boolean getFactionChannelPerm( CommandSender sender ) {
+        if ( !BungeeSuiteChat.factionChat ) {
+            return false;
+        }
+        UPlayer p = UPlayer.get( sender );
+        if ( !p.hasFaction() ) {
+            return false;
+        }
+        if ( p.getFaction().isDefault() ) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean getTownyChannelPerm( CommandSender sender ) {
+        if ( !BungeeSuiteChat.towny ) {
+            return false;
+        }
+        Resident r;
+        try {
+            r = TownyUniverse.getDataSource().getResident( sender.getName() );
+        } catch ( NotRegisteredException e ) {
+            return false;
+        }
+        if ( !r.hasTown() ) {
+            return false;
+        }
+        return true;
+    }
+
     public static void togglePlayersChannel( CommandSender sender ) {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream( b );
         try {
             out.writeUTF( "TogglePlayersChannel" );
             out.writeUTF( sender.getName() );
+            out.writeBoolean( getFactionChannelPerm( sender ) );
+            out.writeBoolean( getTownyChannelPerm( sender ) );
+            out.writeBoolean( inNation( sender ) );
             out.writeBoolean( sender.hasPermission( "bungeesuite.chat.toggle.bypass" ) );
         } catch ( IOException s ) {
             s.printStackTrace();
@@ -266,6 +306,9 @@ public class ChannelManager {
             out.writeUTF( "TogglePlayerToChannel" );
             out.writeUTF( sender.getName() );
             out.writeUTF( channel );
+            out.writeBoolean( getFactionChannelPerm( sender ) );
+            out.writeBoolean( getTownyChannelPerm( sender ) );
+            out.writeBoolean( inNation( sender ) );
             out.writeBoolean( sender.hasPermission( "bungeesuite.chat.toggle.bypass" ) );
         } catch ( IOException s ) {
             s.printStackTrace();
@@ -314,7 +357,7 @@ public class ChannelManager {
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
     }
 
-    public static void getAdminlChat( String message ) {
+    public static void getAdminChat( String message ) {
         Collection<BSPlayer> recipients = new ArrayList<>();
         recipients.addAll( ChannelManager.getBSAdminPlayers() );
         for ( BSPlayer p : recipients ) {
@@ -328,6 +371,21 @@ public class ChannelManager {
         try {
             out.writeUTF( "TogglePlayersFactionsChannel" );
             out.writeUTF( sender.getName() );
+            out.writeBoolean( getFactionChannelPerm( sender ) );
+        } catch ( IOException s ) {
+            s.printStackTrace();
+        }
+        new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
+    }
+
+    public static void togglePlayersTownyChannels( CommandSender sender ) {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream( b );
+        try {
+            out.writeUTF( "TogglePlayersTownyChannel" );
+            out.writeUTF( sender.getName() );
+            out.writeBoolean( getTownyChannelPerm( sender ) );
+            out.writeBoolean( inNation( sender ) );
         } catch ( IOException s ) {
             s.printStackTrace();
         }
@@ -349,6 +407,13 @@ public class ChannelManager {
                 } else if ( ChannelManager.isFactionAlly( c ) ) {
                     return p.getPlayer().hasPermission( "bungeesuite.chat.channel.factionally" );
                 }
+            } else if ( BungeeSuiteChat.towny && isTownyChannel( c ) ) {
+                if ( c.getName().equals( "Town" ) ) {
+                    return p.getPlayer().hasPermission( "bungeesuite.chat.channel.town" );
+                }
+                if ( c.getName().equals( "Nation" ) ) {
+                    return p.getPlayer().hasPermission( "bungeesuite.chat.channel.nation" );
+                }
             } else {
                 return ChannelManager.isAdmin( c ) && p.getPlayer().hasPermission( "bungeesuite.chat.channel.admin" );
             }
@@ -362,17 +427,46 @@ public class ChannelManager {
     public static void toggleToPlayersFactionChannel( CommandSender sender, String channel ) {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream( b );
-        UPlayer uplayer = UPlayer.get( sender );
         try {
             out.writeUTF( "ToggleToPlayersFactionChannel" );
             out.writeUTF( sender.getName() );
             out.writeUTF( channel );
-            out.writeBoolean( !uplayer.getFaction().isDefault() );
+            out.writeBoolean( getFactionChannelPerm( sender ) );
         } catch ( IOException s ) {
             s.printStackTrace();
         }
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
 
+    }
+
+    public static void toggleToPlayersTownyChannel( CommandSender sender, String channel ) {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream( b );
+        try {
+            out.writeUTF( "ToggleToPlayersTownyChannel" );
+            out.writeUTF( sender.getName() );
+            out.writeUTF( channel );
+            out.writeBoolean( getTownyChannelPerm( sender ) );
+            out.writeBoolean( inNation( sender ) );
+        } catch ( IOException s ) {
+            s.printStackTrace();
+        }
+        new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
+
+    }
+
+    private static boolean inNation( CommandSender sender ) {
+        Resident r;
+        try {
+            r = TownyUniverse.getDataSource().getResident( sender.getName() );
+        } catch ( NotRegisteredException e ) {
+            return false;
+        }
+        try {
+            return r.getTown().hasNation();
+        } catch ( NotRegisteredException e ) {
+            return false;
+        }
     }
 
     public static void getChannelInfo( CommandSender sender, String channel ) {
@@ -405,4 +499,25 @@ public class ChannelManager {
     }
 
 
+    public static void requestFactionChannels() {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream( b );
+        try {
+            out.writeUTF( "GetFactionChannels" );
+        } catch ( IOException s ) {
+            s.printStackTrace();
+        }
+        new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
+    }
+
+    public static void requestTownyChannels() {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream( b );
+        try {
+            out.writeUTF( "GetTownyChannels" );
+        } catch ( IOException s ) {
+            s.printStackTrace();
+        }
+        new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
+    }
 }

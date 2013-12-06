@@ -47,7 +47,22 @@ commands:
         description: Allows the player to talk in the faction ally channel
         aliases: [fcf]
         permission: bungeesuite.chat.channel.faction
-        permission-message: §cYou are unable to talk in this channel         
+        permission-message: §cYou are unable to talk in this channel
+    townychat:
+        description: Allows the player to talk in the towny town channel
+        aliases: [tc]
+        permission: bungeesuite.chat.channel.town
+        permission-message: §cYou are unable to talk in this channel
+    townychattown:
+        description: Allows the player to talk in towny town channel
+        aliases: [tct]
+        permission: bungeesuite.chat.channel.town
+        permission-message: §cYou are unable to talk in this channel
+    townychatnation:
+        description: Allows the player to talk in the towny nation channel
+        aliases: [nationchat, nc, tcn]
+        permission: bungeesuite.chat.channel.nation
+        permission-message: §cYou are unable to talk in this channel
     formatchannel:
         description: Changes the format of the channel
         aliases: [formatc,cformat,cf]
@@ -202,6 +217,8 @@ permissions:
             bungeesuite.chat.channel.global: true
             bungeesuite.chat.channel.faction: true
             bungeesuite.chat.channel.factionally: true
+            bungeesuite.chat.channel.nation: true
+            bungeesuite.chat.channel.town: true
             bungeesuite.chat.command.afk: true
             bungeesuite.chat.command.channelinfo: true
             bungeesuite.chat.command.ignore: true

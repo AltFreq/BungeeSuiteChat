@@ -56,7 +56,7 @@ public class MessageListener implements PluginMessageListener {
         }
         if ( channel.equals( "SendAdminChat" ) ) {
             try {
-                ChannelManager.getAdminlChat( in.readUTF() );
+                ChannelManager.getAdminChat( in.readUTF() );
             } catch ( IOException e ) {
                 e.printStackTrace();
             }
@@ -146,6 +146,14 @@ public class MessageListener implements PluginMessageListener {
         }
         if ( channel.equals( "Reload" ) ) {
             ChannelManager.reload();
+        }
+        if ( channel.equals( "PluginCheck" ) ) {
+            if ( BungeeSuiteChat.factionChat ) {
+                ChannelManager.requestFactionChannels();
+            }
+            if ( BungeeSuiteChat.towny ) {
+                ChannelManager.requestTownyChannels();
+            }
         }
     }
 
