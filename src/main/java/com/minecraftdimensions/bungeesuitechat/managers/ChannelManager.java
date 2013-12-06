@@ -134,7 +134,7 @@ public class ChannelManager {
     public static Collection<Player> getNonLocal( Player player ) {
         Collection<Player> nonLocals = new ArrayList<>();
         for ( Player p : Bukkit.getOnlinePlayers() ) {
-            if ( p.getLocation().distance( player.getLocation() ) > ServerData.getLocalDistance() ) {
+            if ( !p.getWorld().equals( player.getWorld() ) || p.getLocation().distance( player.getLocation() ) > ServerData.getLocalDistance() ) {
                 nonLocals.add( p );
             } else if ( !p.hasPermission( "bungeesuite.chat.channel.local" ) ) {
                 nonLocals.add( p );
