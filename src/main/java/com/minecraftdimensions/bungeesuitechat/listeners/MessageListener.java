@@ -83,7 +83,7 @@ public class MessageListener implements PluginMessageListener {
         }
         if ( channel.equals( "SendServerData" ) ) {
             try {
-                new ServerData( in.readUTF(), in.readUTF(), in.readInt(), in.readBoolean() );
+                new ServerData( in.readUTF(), in.readUTF(), in.readInt(), in.readBoolean(), in.readUTF() );
             } catch ( IOException e ) {
                 e.printStackTrace();
             }

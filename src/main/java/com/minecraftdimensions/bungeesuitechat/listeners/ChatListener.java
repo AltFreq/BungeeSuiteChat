@@ -5,6 +5,7 @@ import com.minecraftdimensions.bungeesuitechat.Utilities;
 import com.minecraftdimensions.bungeesuitechat.managers.ChannelManager;
 import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
 import com.minecraftdimensions.bungeesuitechat.objects.BSPlayer;
+import com.minecraftdimensions.bungeesuitechat.objects.ServerData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -76,7 +77,7 @@ public class ChatListener implements Listener {
             return;
         }
         if ( ChannelManager.isGlobal( p.getChannel() ) ) {
-            //            e.setFormat( e.getFormat().replaceAll( ServerData.getGlobalRegex(), "" ) ); TODO
+            e.setFormat( e.getFormat().replaceAll( ServerData.getGlobalRegex(), "" ) );
             ChannelManager.sendGlobalChat( e.getPlayer().getName(), String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
         } else if ( ChannelManager.isAdmin( p.getChannel() ) ) {
             ChannelManager.sendAdminChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
