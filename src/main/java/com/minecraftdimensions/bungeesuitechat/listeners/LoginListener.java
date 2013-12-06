@@ -56,9 +56,9 @@ public class LoginListener implements Listener {
         }, 10L );
     }
 
-    @EventHandler( priority = EventPriority.NORMAL )
+    @EventHandler(priority = EventPriority.NORMAL)
     public void playerJoin( PlayerJoinEvent e ) {
-        if ( ServerData.getConnectionMessage() ) {
+        if ( ServerData.usingConnectionMessages() ) {
             e.setJoinMessage( null );
         }
     }

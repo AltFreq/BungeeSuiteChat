@@ -34,6 +34,7 @@ public class BungeeSuiteChat extends JavaPlugin {
         registerListeners();
         startTasks();
         setupTowny();
+        setupFactions();
     }
 
     private void startTasks() {
@@ -59,6 +60,7 @@ public class BungeeSuiteChat extends JavaPlugin {
 
     public void setupTowny() {
         towny = Bukkit.getPluginManager().getPlugin( "Towny" ) != null;
+        Bukkit.getConsoleSender().sendMessage( ChatColor.GREEN + "Towny detected, hooking in!" );
     }
 
     public void setupFactions() {
