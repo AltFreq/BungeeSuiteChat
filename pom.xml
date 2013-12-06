@@ -46,13 +46,6 @@
         </dependency>
         <dependency>
             <groupId>com.palmergames.bukkit</groupId>
-            <artifactId>TownyChat</artifactId>
-            <version>0.4</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/TownyChat.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.palmergames.bukkit</groupId>
             <artifactId>towny</artifactId>
             <version>0.84.0.0</version>
             <scope>system</scope>

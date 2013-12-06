@@ -22,10 +22,9 @@ public class BungeeSuiteChat extends JavaPlugin {
     public static String INCOMING_PLUGIN_CHANNEL = "BungeeSuiteChat";
     public static BungeeSuiteChat instance;
     public static Chat CHAT = null;
-    public static com.palmergames.bukkit.TownyChat.Chat tc = null;
     public static boolean usingVault;
     public static boolean factionChat = false;
-    public static boolean townyChat = false;
+    public static boolean towny = false;
 
     @Override
     public void onEnable() {
@@ -34,7 +33,7 @@ public class BungeeSuiteChat extends JavaPlugin {
         usingVault = setupVault();
         registerListeners();
         startTasks();
-        setupTownyChat();
+        setupTowny();
     }
 
     private void startTasks() {
@@ -57,23 +56,16 @@ public class BungeeSuiteChat extends JavaPlugin {
         Bukkit.getMessenger().registerIncomingPluginChannel( this, INCOMING_PLUGIN_CHANNEL, new MessageListener() );
 
     }
-    
-    public void setupTownyChat(){
-    	com.palmergames.bukkit.TownyChat.Chat towny = (com.palmergames.bukkit.TownyChat.Chat) Bukkit.getPluginManager().getPlugin("TownyChat");
-    	if(towny!=null)
-    	{
-    		Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"TownyChat detected, hooking in!");
-    		townyChat = true;
-    		tc = towny;
-    	}
-    	
+
+    public void setupTowny() {
+        towny = Bukkit.getPluginManager().getPlugin( "Towny" ) != null;
     }
 
     public void setupFactions() {
         Factions factions = ( Factions ) Bukkit.getPluginManager().getPlugin( "Factions" );
         if ( factions != null ) {
             if ( !factions.getDescription().getVersion().startsWith( "1" ) ) {
-            	Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"Factions detected, hooking in!");
+                Bukkit.getConsoleSender().sendMessage( ChatColor.GREEN + "Factions detected, hooking in!" );
                 factionChat = true;
                 getCommand( "factionchat" ).setExecutor( new FactionChatCommand() );
                 getCommand( "factionchatally" ).setExecutor( new FactionChatAllyCommand() );

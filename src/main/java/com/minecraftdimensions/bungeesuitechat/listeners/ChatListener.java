@@ -1,13 +1,10 @@
 package com.minecraftdimensions.bungeesuitechat.listeners;
 
-import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
 import com.minecraftdimensions.bungeesuitechat.Utilities;
 import com.minecraftdimensions.bungeesuitechat.managers.ChannelManager;
 import com.minecraftdimensions.bungeesuitechat.managers.PlayerManager;
 import com.minecraftdimensions.bungeesuitechat.objects.BSPlayer;
 import com.minecraftdimensions.bungeesuitechat.objects.ServerData;
-import com.palmergames.bukkit.TownyChat.channels.Channel;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -17,7 +14,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatListener implements Listener {
 
-    @EventHandler( priority = EventPriority.LOWEST )
+    @EventHandler(priority = EventPriority.LOWEST)
     public void setFormatChat( AsyncPlayerChatEvent e ) {
         if ( e.isCancelled() ) {
             return;
@@ -59,7 +56,7 @@ public class ChatListener implements Listener {
         }
     }
 
-    @EventHandler( priority = EventPriority.HIGH )
+    @EventHandler(priority = EventPriority.HIGH)
     public void setVariables( AsyncPlayerChatEvent e ) {
         if ( e.isCancelled() ) {
             return;
@@ -68,7 +65,7 @@ public class ChatListener implements Listener {
         e.setMessage( Utilities.SetMessage( e.getPlayer(), e.getMessage() ) );
     }
 
-    @EventHandler( priority = EventPriority.MONITOR )
+    @EventHandler(priority = EventPriority.MONITOR)
     public void setLogChat( AsyncPlayerChatEvent e ) {
         if ( e.isCancelled() ) {
             return;
@@ -78,24 +75,15 @@ public class ChatListener implements Listener {
             e.setCancelled( true );
             return;
         }
-        if(BungeeSuiteChat.townyChat){
-        	for (Channel channel : BungeeSuiteChat.tc.getChannelsHandler().getAllChannels().values()) {
-				if (BungeeSuiteChat.tc.getTowny().hasPlayerMode(e.getPlayer(), channel.getName())) {
-	            	 e.getRecipients().addAll( PlayerManager.getChatSpies(e.getPlayer(), e.getRecipients()) );
-	                 Utilities.logChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
-	                 return;
-				}
-        	}
-        }
         if ( ChannelManager.isGlobal( p.getChannel() ) ) {
-        	e.setFormat(e.getFormat().replaceAll(ServerData.getGlobalRegex(), ""));
+            e.setFormat( e.getFormat().replaceAll( ServerData.getGlobalRegex(), "" ) );
             ChannelManager.sendGlobalChat( e.getPlayer().getName(), String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
         } else if ( ChannelManager.isAdmin( p.getChannel() ) ) {
             ChannelManager.sendAdminChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
         } else {
-            e.getRecipients().addAll( PlayerManager.getChatSpies(e.getPlayer(), e.getRecipients()) );
+            e.getRecipients().addAll( PlayerManager.getChatSpies( e.getPlayer(), e.getRecipients() ) );
             Utilities.logChat( String.format( e.getFormat(), p.getDisplayingName(), e.getMessage() ) );
-        } 
+        }
 
     }
 
