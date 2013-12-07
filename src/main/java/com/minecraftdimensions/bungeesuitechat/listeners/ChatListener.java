@@ -54,10 +54,18 @@ public class ChatListener implements Listener {
                 e.getRecipients().clear();
                 e.getRecipients().addAll( ChannelManager.getFactionAllyPlayers( e.getPlayer() ) );
             }
+        } else if ( BungeeSuiteChat.towny && ChannelManager.isTownyChannel( p.getChannel() ) ) {
+            if ( p.getChannel().getName().equals( "Town" ) ) {
+                e.getRecipients().clear();
+                e.getRecipients().addAll( ChannelManager.getTownPlayers( e.getPlayer() ) );
+            } else if ( p.getChannel().getName().equals( "Nation" ) ) {
+                e.getRecipients().clear();
+                e.getRecipients().addAll( ChannelManager.getNationPlayers( e.getPlayer() ) );
+            }
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler( priority = EventPriority.HIGH )
     public void setVariables( AsyncPlayerChatEvent e ) {
         if ( e.isCancelled() ) {
             return;
@@ -66,7 +74,7 @@ public class ChatListener implements Listener {
         e.setMessage( Utilities.SetMessage( e.getPlayer(), e.getMessage() ) );
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler( priority = EventPriority.MONITOR )
     public void setLogChat( AsyncPlayerChatEvent e ) {
         if ( e.isCancelled() ) {
             return;

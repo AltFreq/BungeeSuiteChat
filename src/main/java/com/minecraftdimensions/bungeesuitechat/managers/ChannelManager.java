@@ -10,7 +10,9 @@ import com.minecraftdimensions.bungeesuitechat.objects.Channel;
 import com.minecraftdimensions.bungeesuitechat.objects.ServerData;
 import com.minecraftdimensions.bungeesuitechat.tasks.PluginMessageTask;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -519,5 +521,41 @@ public class ChannelManager {
             s.printStackTrace();
         }
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
+    }
+
+    public static Collection<Player> getTownPlayers( Player player ) {
+        Collection<Player> townPlayers = new ArrayList<>();
+        Resident r;
+        try {
+            r = TownyUniverse.getDataSource().getResident( player.getName() );
+            Town t = r.getTown();
+            for ( Player ps : TownyUniverse.getOnlinePlayers( t ) ) {
+                if ( ps.hasPermission( "bungeesuite.chat.channel.town" ) ) {
+                    townPlayers.add( ps );
+                }
+            }
+        } catch ( NotRegisteredException e ) {
+            e.printStackTrace();
+        }
+
+        return townPlayers;
+    }
+
+    public static Collection<Player> getNationPlayers( Player player ) {
+        Collection<Player> townPlayers = new ArrayList<>();
+        Resident r;
+        try {
+            r = TownyUniverse.getDataSource().getResident( player.getName() );
+            Nation n = r.getTown().getNation();
+            for ( Player ps : TownyUniverse.getOnlinePlayers( n ) ) {
+                if ( ps.hasPermission( "bungeesuite.chat.channel.nation" ) ) {
+                    townPlayers.add( ps );
+                }
+            }
+        } catch ( NotRegisteredException e ) {
+            e.printStackTrace();
+        }
+
+        return townPlayers;
     }
 }
