@@ -310,7 +310,11 @@ public class ChannelManager {
             out.writeUTF( channel );
             out.writeBoolean( getFactionChannelPerm( sender ) );
             out.writeBoolean( getTownyChannelPerm( sender ) );
-            out.writeBoolean( inNation( sender ) );
+            if ( BungeeSuiteChat.towny ) {
+                out.writeBoolean( inNation( sender ) );
+            } else {
+                out.writeBoolean( false );
+            }
             out.writeBoolean( sender.hasPermission( "bungeesuite.chat.toggle.bypass" ) );
         } catch ( IOException s ) {
             s.printStackTrace();
@@ -449,7 +453,12 @@ public class ChannelManager {
             out.writeUTF( sender.getName() );
             out.writeUTF( channel );
             out.writeBoolean( getTownyChannelPerm( sender ) );
-            out.writeBoolean( inNation( sender ) );
+            if ( BungeeSuiteChat.towny ) {
+                out.writeBoolean( inNation( sender ) );
+            } else {
+                out.writeBoolean( false );
+            }
+
         } catch ( IOException s ) {
             s.printStackTrace();
         }
