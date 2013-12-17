@@ -247,6 +247,13 @@ public class PlayerManager {
             s.printStackTrace();
         }
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
+
+        if ( BungeeSuiteChat.factionChat ) {
+            ChannelManager.requestFactionChannels();
+        }
+        if ( BungeeSuiteChat.towny ) {
+            ChannelManager.requestTownyChannels();
+        }
     }
 
     public static void reload() {
