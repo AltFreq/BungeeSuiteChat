@@ -467,16 +467,20 @@ public class ChannelManager {
     }
 
     private static boolean inNation( CommandSender sender ) {
-        Resident r;
-        try {
-            r = TownyUniverse.getDataSource().getResident( sender.getName() );
-        } catch ( NotRegisteredException e ) {
+        if ( !BungeeSuiteChat.towny ) {
             return false;
-        }
-        try {
-            return r.getTown().hasNation();
-        } catch ( NotRegisteredException e ) {
-            return false;
+        } else {
+            Resident r;
+            try {
+                r = TownyUniverse.getDataSource().getResident( sender.getName() );
+            } catch ( NotRegisteredException e ) {
+                return false;
+            }
+            try {
+                return r.getTown().hasNation();
+            } catch ( NotRegisteredException e ) {
+                return false;
+            }
         }
     }
 
