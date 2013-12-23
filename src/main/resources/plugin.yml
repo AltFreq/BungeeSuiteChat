@@ -182,6 +182,11 @@ commands:
         permission: bungeesuite.chat.command.muteall
         permission-message: §cYou do not have permission for this command
         usage: /<command>
+    realname:
+        description: Finds the real name of a player with a nickname
+        permission: bungeesuite.chat.command.realname
+        permission-message: §cYou do not have permission for this command
+        usage: /<command> (nickname)
 permissions:
     bungeesuite.chat.*:
         description: Gives access to all BungeeSuiteChat commands
@@ -206,6 +211,7 @@ permissions:
     bungeesuite.chat.mod:
         description: Gives access to all BungeeSuiteChat mod commands
         children:
+            bungeesuite.chat.command.realname: true
             bungeesuite.chat.command.mute: true
             bungeesuite.chat.command.tempmute: true
             bungeesuite.chat.user: true
