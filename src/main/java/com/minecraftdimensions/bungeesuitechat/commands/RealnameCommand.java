@@ -24,10 +24,6 @@ public class RealnameCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
-		if (args.length == 0) {
-                        sender.sendMessage(command.getUsage());
-			return true;
-		}
 		if (args.length == 1) {
                         if(sender instanceof Player) {
                                 if (!sender.hasPermission("bungeesuite.chat.command.realname")) {
