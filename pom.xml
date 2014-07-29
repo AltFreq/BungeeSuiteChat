@@ -42,7 +42,7 @@
             <artifactId>mcore</artifactId>
             <version>6.9.1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/mcore.jar</systemPath>
+            <systemPath>${project.basedir}/lib/MassiveCore.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.palmergames.bukkit</groupId>
