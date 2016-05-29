@@ -100,6 +100,7 @@ public class BungeeSuiteChat extends JavaPlugin {
         getCommand( "muteall" ).setExecutor( new MuteAllCommand() );
         getCommand( "nickname" ).setExecutor( new NicknameCommand() );
         getCommand( "nicknameoff" ).setExecutor( new NicknameOffCommand() );
+        getCommand( "realname" ).setExecutor( new RealnameCommand() );
         getCommand( "reloadchat" ).setExecutor( new ReloadChatCommand() );
         getCommand( "reply" ).setExecutor( new ReplyCommand() );
         getCommand( "server" ).setExecutor( new ServerCommand() );

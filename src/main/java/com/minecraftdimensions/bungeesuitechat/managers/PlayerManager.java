@@ -209,6 +209,20 @@ public class PlayerManager {
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
 
     }
+    
+    public static void realnamePlayer( String name , String nick) {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream( b );
+        try {
+            out.writeUTF( "RealName" );
+            out.writeUTF( name );
+            out.writeUTF( nick );
+        } catch ( IOException s ) {
+            s.printStackTrace();
+        }
+        new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
+
+    }
 
     public static void replyToPlayer( CommandSender sender, String message ) {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
@@ -271,5 +285,14 @@ public class PlayerManager {
             s.printStackTrace();
         }
         new PluginMessageTask( b ).runTaskAsynchronously( BungeeSuiteChat.instance );
+    }
+
+    public static BSPlayer getsimilarNickPlayer(String nick) {
+        for ( BSPlayer p : onlinePlayers.values() ) {
+            if ( ChatColor.stripColor(p.getNickname()).toLowerCase().contains( nick.toLowerCase() ) ) {
+                return p;
+            }
+        }
+        return getSimilarPlayer(nick);
     }
 }
