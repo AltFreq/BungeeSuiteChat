@@ -2,8 +2,8 @@ package com.minecraftdimensions.bungeesuitechat.managers;
 
 import com.massivecraft.factions.Rel;
 import com.massivecraft.factions.entity.Faction;
-import com.massivecraft.factions.entity.FactionColls;
-import com.massivecraft.factions.entity.UPlayer;
+import com.massivecraft.factions.entity.FactionColl;
+import com.massivecraft.factions.entity.MPlayer;
 import com.minecraftdimensions.bungeesuitechat.BungeeSuiteChat;
 import com.minecraftdimensions.bungeesuitechat.objects.BSPlayer;
 import com.minecraftdimensions.bungeesuitechat.objects.Channel;
@@ -167,7 +167,7 @@ public class ChannelManager {
 
     public static Collection<Player> getFactionPlayers( Player p ) {
         Collection<Player> factionPlayers = new ArrayList<>();
-        UPlayer uplayer = UPlayer.get( p );
+        MPlayer uplayer = MPlayer.get( p );
         for ( Player ps : uplayer.getFaction().getOnlinePlayers() ) {
             if ( ps.hasPermission( "bungeesuite.chat.channel.faction" ) ) {
                 factionPlayers.add( ps );
@@ -178,15 +178,16 @@ public class ChannelManager {
 
     public static Collection<Player> getFactionAllyPlayers( Player p ) {
         Collection<Player> factionPlayers = new ArrayList<>();
-        UPlayer uplayer = UPlayer.get( p );
-        Map<Rel, List<String>> rels = uplayer.getFaction().getFactionNamesPerRelation( uplayer.getFaction() );
+        MPlayer uplayer = MPlayer.get( p );
+        Set<Rel> rels = EnumSet.of(Rel.TRUCE, Rel.ALLY, Rel.ENEMY);
+        Map<Rel, List<String>> rel_names = uplayer.getFaction().getRelationNames(uplayer,rels,true);
         for ( Player ps : uplayer.getFaction().getOnlinePlayers() ) {
             if ( ps.hasPermission( "bungeesuite.chat.channel.factionally" ) ) {
                 factionPlayers.add( ps );
             }
         }
-        for ( String data : rels.get( Rel.ALLY ) ) {
-            Faction f = FactionColls.get().getForUniverse( uplayer.getFaction().getUniverse() ).getByName( ChatColor.stripColor( data ) );
+        for ( String data : rel_names.get( Rel.ALLY ) ) {
+            Faction f = FactionColl.get().getByName( ChatColor.stripColor( data ) );
             for ( Player ps : f.getOnlinePlayers() ) {
                 if ( ps.hasPermission( "bungeesuite.chat.channel.factionally" ) ) {
                     factionPlayers.add( ps );
@@ -258,7 +259,7 @@ public class ChannelManager {
         if ( !BungeeSuiteChat.factionChat ) {
             return false;
         }
-        UPlayer p = UPlayer.get( sender );
+        MPlayer p = MPlayer.get( sender );
         if ( !p.hasFaction() ) {
             return false;
         }
